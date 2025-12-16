@@ -1,0 +1,70 @@
+import { createClient } from '@supabase/supabase-js';
+import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+function createAdminClient() {
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Missing Supabase configuration: SUPABASE_SERVICE_ROLE_KEY not set');
+  }
+  return createClient(supabaseUrl, supabaseKey);
+}
+
+// GET - Fetch all SEO metadata
+export async function GET(request: NextRequest) {
+  try {
+    const supabase = createAdminClient();
+    
+    const { data, error } = await supabase
+      .from('seo_metadata')
+      .select('*')
+      .order('page_url', { ascending: true });
+
+    if (error) throw error;
+
+    return NextResponse.json({ metadata: data });
+  } catch (error) {
+    console.error('Error fetching SEO metadata:', error);
+    return NextResponse.json({ error: 'Failed to fetch metadata. Server configuration incomplete.' }, { status: 500 });
+  }
+}
+
+// PUT - Update SEO metadata
+export async function PUT(request: NextRequest) {
+  try {
+    const supabase = createAdminClient();
+    
+    const body = await request.json();
+    const { id, title, description, keywords, og_image, og_title, og_description, twitter_card, canonical_url } = body;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
+    const { data, error } = await supabase
+      .from('seo_metadata')
+      .update({
+        title,
+        description,
+        keywords,
+        og_image,
+        og_title,
+        og_description,
+        twitter_card,
+        canonical_url,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .select();
+
+    if (error) throw error;
+
+    return NextResponse.json({ metadata: data[0] });
+  } catch (error) {
+    console.error('Error updating SEO metadata:', error);
+    return NextResponse.json({ error: 'Failed to update metadata. Server configuration incomplete.' }, { status: 500 });
+  }
+}

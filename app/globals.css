@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 265 60% 28%;
+    --card: 0 0% 100%;
+    --card-foreground: 265 60% 28%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 265 60% 28%;
+    --primary: 265 60% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 265 50% 93%;
+    --secondary-foreground: 265 60% 28%;
+    --muted: 265 50% 93%;
+    --muted-foreground: 265 20% 50%;
+    --accent: 264 83% 76%;
+    --accent-foreground: 265 60% 28%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 265 30% 88%;
+    --input: 265 30% 88%;
+    --ring: 264 83% 76%;
+    --chart-1: 265 60% 28%;
+    --chart-2: 264 83% 76%;
+    --chart-3: 265 50% 93%;
+    --chart-4: 280 70% 60%;
+    --chart-5: 250 60% 65%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 265 60% 5%;
+    --foreground: 265 50% 93%;
+    --card: 265 60% 8%;
+    --card-foreground: 265 50% 93%;
+    --popover: 265 60% 8%;
+    --popover-foreground: 265 50% 93%;
+    --primary: 264 83% 76%;
+    --primary-foreground: 265 60% 10%;
+    --secondary: 265 40% 15%;
+    --secondary-foreground: 265 50% 93%;
+    --muted: 265 40% 15%;
+    --muted-foreground: 265 20% 60%;
+    --accent: 264 83% 76%;
+    --accent-foreground: 265 60% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 265 40% 20%;
+    --input: 265 40% 20%;
+    --ring: 264 83% 76%;
+    --chart-1: 264 83% 76%;
+    --chart-2: 265 60% 28%;
+    --chart-3: 280 70% 60%;
+    --chart-4: 250 60% 65%;
+    --chart-5: 270 50% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    transition-property: color, background-color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

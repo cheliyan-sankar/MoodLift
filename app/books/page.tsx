@@ -1,0 +1,217 @@
+'use client';
+
+import { useState, useEffect, useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft, BookOpen, Sparkles, Filter } from 'lucide-react';
+import Link from 'next/link';
+import { MoodBasedBooks } from '@/components/mood-based-books';
+import { AppFooter } from '@/components/app-footer';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/lib/auth-context';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+export default function BooksPage() {
+  const { user } = useAuth();
+  const [selectedMood, setSelectedMood] = useState<string>('all');
+  const [latestMood, setLatestMood] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      fetchLatestMoodAssessment();
+    } else {
+      setLoading(false);
+    }
+  }, [user, fetchLatestMoodAssessment]);
+
+  const fetchLatestMoodAssessment = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('mood_assessments')
+        .select('mood_result, created_at')
+        .eq('user_id', user?.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error && error.code !== 'PGRST116') {
+        throw error;
+      }
+
+      if (data?.mood_result) {
+        setLatestMood(data.mood_result);
+        setSelectedMood(data.mood_result);
+      }
+    } catch (error) {
+      console.error('Error fetching mood assessment:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
+  const moodOptions = [
+    { value: 'all', label: 'All Books' },
+    { value: 'Excellent', label: 'For Excellent Mood' },
+    { value: 'Good', label: 'For Good Mood' },
+    { value: 'Moderate', label: 'For Moderate Mood' },
+    { value: 'Needs Support', label: 'For Extra Support' },
+  ];
+
+  const getMoodDescription = (mood: string) => {
+    const descriptions: { [key: string]: string } = {
+      'Excellent': 'Books to maintain your positive momentum and inspire continued growth',
+      'Good': 'Practical reads to help you build on your current well-being',
+      'Moderate': 'Supportive books with coping strategies and gentle guidance',
+      'Needs Support': 'Therapeutic and healing-focused reads for difficult times',
+      'all': 'Explore our complete collection of mental health and self-improvement books',
+    };
+    return descriptions[mood] || descriptions['all'];
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-secondary/20 to-accent/10">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-4">
+              <Link href="/">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Home
+                </Button>
+              </Link>
+              <h1 className="text-xl font-bold text-primary">Book Recommendations</h1>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
+        <div className="text-center mb-12">
+          <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, #3C1F71, #5B3A8F)' }}>
+            <BookOpen className="w-10 h-10 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold text-primary mb-4">
+            Personalized Book Recommendations
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Curated reading suggestions based on your emotional well-being and personal growth goals
+          </p>
+        </div>
+
+        {latestMood && !loading && (
+          <Card className="mb-8 border-2 bg-gradient-to-br from-accent/5 to-primary/5">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #3C1F71, #5B3A8F)' }}>
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-primary mb-1">
+                    Based on Your Recent Mood Assessment
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Your mood was analyzed as <span className="font-semibold">{latestMood}</span>.
+                    These books are specially selected to support your current emotional state.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card className="mb-8 border-2">
+          <CardHeader>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <CardTitle className="flex items-center gap-2">
+                <Filter className="w-5 h-5 text-accent" />
+                Filter by Mood
+              </CardTitle>
+              <Select value={selectedMood} onValueChange={setSelectedMood}>
+                <SelectTrigger className="w-full sm:w-[280px]">
+                  <SelectValue placeholder="Select mood category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {moodOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">
+              {getMoodDescription(selectedMood)}
+            </p>
+          </CardContent>
+        </Card>
+
+        <MoodBasedBooks
+          moodResult={selectedMood === 'all' ? undefined : selectedMood}
+          showAll={selectedMood === 'all'}
+          limit={12}
+        />
+
+        <Card className="mt-12 bg-gradient-to-br from-accent/10 to-primary/10 border-2">
+          <CardContent className="p-4 sm:p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: 'linear-gradient(135deg, #3C1F71, #5B3A8F)' }}>
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-primary mb-3">
+                  Why Reading Matters for Mental Health
+                </h3>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    Research shows that reading can reduce stress by up to 68%, lower heart rate,
+                    and ease muscle tension. Just 6 minutes of reading can be enough to reduce stress levels.
+                  </p>
+                  <p>
+                    Books provide perspective, teach coping strategies, and help us feel less alone
+                    in our struggles. They offer a safe space to explore emotions and gain insights
+                    into the human experience.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {!user && (
+          <Card className="mt-8 border-2 border-accent">
+            <CardContent className="p-4 sm:p-6 md:p-8 text-center">
+              <Sparkles className="w-12 h-12 mx-auto mb-4 text-accent" />
+              <h3 className="text-xl font-bold text-primary mb-2">
+                Get Personalized Recommendations
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Sign in and take our mood assessment to receive book recommendations
+                tailored to your emotional state.
+              </p>
+              <Link href="/assessment">
+                <Button className="bg-gradient-to-r from-primary to-accent">
+                  Take Mood Assessment
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+      </main>
+
+      <AppFooter />
+    </div>
+  );
+}
