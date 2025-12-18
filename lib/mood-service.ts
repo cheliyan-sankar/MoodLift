@@ -149,6 +149,26 @@ export async function saveDailyMood(userId: string, mood: MoodType) {
 
     if (checkError) throw checkError;
 
+    // Helper to map MoodType to numeric mood score (1-10)
+    const moodToScore = (m: MoodType) => {
+      switch (m) {
+        case 'stressed':
+          return 3;
+        case 'sad':
+          return 4;
+        case 'anxious':
+          return 2;
+        case 'bored':
+          return 5;
+        case 'happy':
+          return 8;
+        default:
+          return 5;
+      }
+    };
+
+    let saved;
+
     if (existing && existing.length > 0) {
       // Update existing mood
       const { data, error } = await supabase
@@ -158,7 +178,7 @@ export async function saveDailyMood(userId: string, mood: MoodType) {
         .select();
 
       if (error) throw error;
-      return data;
+      saved = data?.[0] || null;
     } else {
       // Insert new mood
       const { data, error } = await supabase.from('daily_moods').insert([
@@ -167,11 +187,53 @@ export async function saveDailyMood(userId: string, mood: MoodType) {
           mood,
           recorded_at: new Date().toISOString(),
         },
-      ]);
+      ]).select();
 
       if (error) throw error;
-      return data;
+      saved = data?.[0] || null;
     }
+
+    // Also upsert a synthetic game session so progress tracking counts the mood check
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const startOfDay = new Date(today).toISOString();
+      const endOfDay = new Date(new Date(today).getTime() + 24 * 60 * 60 * 1000).toISOString();
+
+      const { data: existingSession } = await supabase
+        .from('game_sessions')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('game_title', 'Mood Check')
+        .gte('completed_at', startOfDay)
+        .lt('completed_at', endOfDay)
+        .limit(1);
+
+      const moodScore = moodToScore(mood);
+
+      if (existingSession && existingSession.length > 0) {
+        await supabase
+          .from('game_sessions')
+          .update({ mood_after: moodScore, completed_at: new Date().toISOString() })
+          .eq('id', existingSession[0].id);
+      } else {
+        await supabase.from('game_sessions').insert([
+          {
+            user_id: userId,
+            game_title: 'Mood Check',
+            score: 0,
+            duration: 0,
+            mood_before: null,
+            mood_after: moodScore,
+            completed_at: new Date().toISOString(),
+          },
+        ]);
+      }
+    } catch (e) {
+      // Non-fatal: mood saved but session upsert failed
+      console.error('Error upserting mood game session:', e);
+    }
+
+    return saved;
   } catch (error) {
     console.error('Error saving daily mood:', error);
     return null;
