@@ -60,9 +60,10 @@ export function GoogleSignInPopup() {
 
   return (
     <div
-      className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[calc(100%-2rem)] max-w-[320px] transition-all duration-300 ${
-        isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+      className={`fixed top-4 right-4 z-50 w-[calc(100%-2rem)] max-w-[320px] transition-all duration-300 ${
+        isClosing ? 'opacity-0 -translate-y-2 scale-95' : 'opacity-100 translate-y-0 scale-100'
       }`}
+      style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
     >
       <div
         className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 border-2 relative"
