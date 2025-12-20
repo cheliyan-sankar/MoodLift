@@ -118,9 +118,9 @@ export default function ConsultantCarousel() {
   // If 3 or fewer consultants just show them inline
   if (consultants.length <= 3) {
     return (
-      <div className="flex gap-4">
+      <div className="flex gap-4 overflow-x-hidden">
         {consultants.map((c) => (
-          <div key={c.id} style={{ flex: '0 0 calc((100% - 32px) / 3)' }}>
+          <div key={c.id} className="consultant-card-wrapper">
             <Card className="relative border-2 overflow-hidden rounded-lg h-[220px]">
               {c.picture_url ? (
                 <div className="relative h-full w-full">
@@ -166,7 +166,7 @@ export default function ConsultantCarousel() {
     >
       <div ref={trackRef} className="flex gap-4 will-change-transform">
         {consultants.map((c) => (
-          <div key={c.id} style={{ flex: '0 0 calc((100% - 32px) / 3)' }}>
+          <div key={c.id} className="consultant-card-wrapper">
             <Card className="relative border-2 overflow-hidden rounded-lg h-[220px]">
               {c.picture_url ? (
                 <div className="relative h-full w-full">
@@ -203,7 +203,7 @@ export default function ConsultantCarousel() {
 
         {/** duplicated for seamless looping */}
         {consultants.map((c) => (
-          <div key={`dup-${c.id}`} style={{ flex: '0 0 calc((100% - 32px) / 3)' }}>
+          <div key={`dup-${c.id}`} className="consultant-card-wrapper">
             <Card className="relative border-2 overflow-hidden rounded-lg h-[220px]">
               {c.picture_url ? (
                 <div className="relative h-full w-full">
@@ -240,6 +240,26 @@ export default function ConsultantCarousel() {
       <style jsx>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* One card per view on mobile; more on larger screens */
+        .consultant-card-wrapper {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+
+        @media (min-width: 640px) {
+          .consultant-card-wrapper {
+            flex: 0 0 calc((100% - 16px) / 2);
+            max-width: calc((100% - 16px) / 2);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .consultant-card-wrapper {
+            flex: 0 0 calc((100% - 32px) / 3);
+            max-width: calc((100% - 32px) / 3);
+          }
+        }
       `}</style>
     </div>
   );
