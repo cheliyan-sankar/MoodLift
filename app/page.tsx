@@ -13,7 +13,7 @@ import { QuoteCarousel } from '@/components/quote-carousel';
 import { FAQSection } from '@/components/faq-section';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import { saveDailyMood, getGameRecommendations, type MoodType } from '@/lib/mood-service';
+import { saveDailyMood, getGameRecommendations, getTodaysMood, type MoodType } from '@/lib/mood-service';
 import { AppFooter } from '@/components/app-footer';
 import StructuredData from '@/components/structured-data';
 import {
@@ -51,8 +51,26 @@ export default function Home() {
     }
   };
 
-  const handleAuthSuccess = () => {
-    router.push('/assessment');
+  const handleAuthSuccess = async () => {
+    try {
+      const { data } = await supabase.auth.getUser();
+      const userId = data?.user?.id;
+      if (!userId) return;
+
+      // If user hasn't recorded today's mood yet, redirect to assessment
+      try {
+        const todays = await getTodaysMood(userId);
+        if (!todays) {
+          router.push('/assessment');
+        }
+      } catch (e) {
+        console.error('Error checking today mood after auth:', e);
+        // fallback to redirecting to assessment
+        router.push('/assessment');
+      }
+    } catch (e) {
+      console.error('Error handling auth success:', e);
+    }
   };
 
   const handleSignOut = async () => {

@@ -75,6 +75,27 @@ export default function BooksCoversAdmin() {
     }
   };
 
+  const uploadCoverImage = async (file: File): Promise<string | null> => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/admin/assets', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      return data.asset?.url || data.url || null;
+    } catch (err) {
+      console.error('Upload failed:', err);
+      setError('Failed to upload image');
+      return null;
+    }
+  };
+
   const handleSave = async () => {
     if (!selectedBook) return;
 
@@ -170,18 +191,37 @@ export default function BooksCoversAdmin() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Cover Image URL</label>
-                    <Input
-                      value={selectedBook.cover_image_url || ''}
-                      onChange={(e) =>
-                        setSelectedBook({
-                          ...selectedBook,
-                          cover_image_url: e.target.value,
-                        })
-                      }
-                      placeholder="https://example.com/image.jpg"
-                      className="w-full"
-                    />
+                    <label className="block text-sm font-medium mb-2">Cover Image</label>
+                    <div className="flex gap-4 items-start">
+                      <Input
+                        value={selectedBook.cover_image_url || ''}
+                        onChange={(e) =>
+                          setSelectedBook({
+                            ...selectedBook,
+                            cover_image_url: e.target.value,
+                          })
+                        }
+                        placeholder="https://example.com/image.jpg"
+                        className="flex-1"
+                      />
+                      <div
+                        className="border-2 border-dashed rounded-lg p-3 text-center cursor-pointer w-36 h-12 flex items-center justify-center"
+                        onClick={() => {
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.accept = 'image/*';
+                          input.onchange = async (e: any) => {
+                            const file = e.target.files[0];
+                            if (!file) return;
+                            const url = await uploadCoverImage(file);
+                            if (url) setSelectedBook({ ...selectedBook, cover_image_url: url });
+                          };
+                          input.click();
+                        }}
+                      >
+                        Upload
+                      </div>
+                    </div>
                   </div>
 
                   {selectedBook.cover_image_url && (

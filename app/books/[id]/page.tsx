@@ -24,6 +24,7 @@ type Book = {
   recommendation_reason?: string;
   amazon_affiliate_link?: string;
   flipkart_affiliate_link?: string;
+  affiliate_link?: string;
   mood_tags?: string[];
   created_at?: string;
 };
@@ -37,6 +38,7 @@ function BookDetailContent() {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
   const [isPinned, setIsPinned] = useState(false);
+  const [coverAvailable, setCoverAvailable] = useState<boolean>(false);
 
   useEffect(() => {
     fetchBook();
@@ -56,6 +58,17 @@ function BookDetailContent() {
       if (error) throw error;
       if (data) {
         setBook(data);
+        // check if cover image URL is reachable
+        if (data.cover_image_url) {
+          try {
+            const resp = await fetch(data.cover_image_url, { method: 'HEAD' });
+            setCoverAvailable(resp.ok);
+          } catch (err) {
+            setCoverAvailable(false);
+          }
+        } else {
+          setCoverAvailable(false);
+        }
       }
     } catch (error) {
       console.error('Error fetching book:', error);
@@ -178,7 +191,7 @@ function BookDetailContent() {
           <div className="md:col-span-1">
             <div className="sticky top-24">
               <div className="relative">
-                {book.cover_image_url ? (
+                {book.cover_image_url && coverAvailable ? (
                   <div className="w-full rounded-xl overflow-hidden shadow-2xl">
                     <img
                       src={book.cover_image_url}
@@ -215,6 +228,14 @@ function BookDetailContent() {
                   <Share2 className="w-4 h-4" />
                   Share
                 </Button>
+                {book.affiliate_link && (
+                  <a href={book.affiliate_link} target="_blank" rel="noopener noreferrer" className="w-full">
+                    <Button variant="secondary" className="w-full gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      Visit Link
+                    </Button>
+                  </a>
+                )}
               </div>
             </div>
           </div>

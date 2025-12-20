@@ -25,25 +25,57 @@ export async function POST(request: NextRequest) {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Query with case-insensitive email matching
-    const { data, error } = await supabase
-      .from('admin_users')
-      .select('*')
-      .ilike('email', email);
+    // Safer: fetch potential matches then compare lowercased emails in JS
+    try {
+      const queryPromise = supabase
+        .from('admin_users')
+        .select('email');
 
-    if (error) {
-      console.error('Admin check error:', error);
+      const timeoutMs = 4000;
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Supabase query timed out')), timeoutMs)
+      );
+
+      const result: any = await Promise.race([queryPromise, timeoutPromise]);
+
+      const { data, error } = result || {};
+
+      if (error) {
+        console.error('Admin check error (fetch):', error);
+        // Allow access in development for testing
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Development mode: allowing admin access');
+          return NextResponse.json({ isAdmin: true });
+        }
+        return NextResponse.json({ isAdmin: false, error: 'Failed to check admin status' });
+      }
+
+      // proceed with data below
+      var fetchedData = data;
+    } catch (err: any) {
+      console.error('Admin check timed out or failed:', err);
+      // Distinguish timeout vs other errors
+      if ((err || {}).message && (err.message as string).includes('timed out')) {
+        return NextResponse.json({ isAdmin: false, error: 'Supabase request timed out' }, { status: 504 });
+      }
       // Allow access in development for testing
       if (process.env.NODE_ENV === 'development') {
         console.log('Development mode: allowing admin access');
         return NextResponse.json({ isAdmin: true });
       }
-      return NextResponse.json({ isAdmin: false });
+      return NextResponse.json({ isAdmin: false, error: 'Failed to check admin status' });
     }
 
-    if (data && data.length > 0) {
-      return NextResponse.json({ isAdmin: true });
-    }
+    const normalized = (email || '').trim().toLowerCase();
+    const found = (fetchedData || []).some((row: any) => {
+      try {
+        return String(row.email || '').trim().toLowerCase() === normalized;
+      } catch (e) {
+        return false;
+      }
+    });
+
+    if (found) return NextResponse.json({ isAdmin: true });
 
     // Allow access in development for testing
     if (process.env.NODE_ENV === 'development') {

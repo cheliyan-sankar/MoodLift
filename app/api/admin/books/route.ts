@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
       cover_color, 
       genre,
       cover_image_url,
+      affiliate_link,
       recommended_by,
       recommendation_reason
     } = body;
@@ -59,6 +60,9 @@ export async function POST(request: NextRequest) {
       genre: genre || 'Self-Help',
     };
 
+    if (cover_image_url !== undefined) insertPayload.cover_image_url = cover_image_url;
+    if (affiliate_link !== undefined) insertPayload.affiliate_link = affiliate_link;
+
     if (recommended_by !== undefined) insertPayload.recommended_by = recommended_by;
     if (recommendation_reason !== undefined) insertPayload.recommendation_reason = recommendation_reason;
 
@@ -72,25 +76,23 @@ export async function POST(request: NextRequest) {
       throw error;
     }
 
-    // Save cover_image_url if provided
-    if (cover_image_url && data?.[0]) {
-      try {
-        await supabase
-          .from('books')
-          .update({ cover_image_url })
-          .eq('id', data[0].id);
-      } catch (err) {
-        console.log('Could not save cover_image_url directly, will persist in state');
+    // cover_image_url and affiliate_link are included in insertPayload where possible.
+
+    // Return created book (should include persisted fields)
+    const createdId = data?.[0]?.id;
+    if (createdId) {
+      const { data: fetched, error: fetchErr } = await supabase
+        .from('books')
+        .select('*')
+        .eq('id', createdId)
+        .maybeSingle();
+      if (fetchErr) {
+        console.error('Failed to re-fetch created book:', fetchErr);
       }
+      return NextResponse.json({ book: fetched || data?.[0] });
     }
 
-    // Return book with cover_image_url included for frontend
-    const book = data?.[0];
-    if (book && cover_image_url) {
-      book.cover_image_url = cover_image_url;
-    }
-
-    return NextResponse.json({ book });
+    return NextResponse.json({ book: data?.[0] });
   } catch (error) {
     console.error('Error creating book:', error);
     return NextResponse.json({ error: 'Failed to create book' }, { status: 500 });
@@ -114,7 +116,10 @@ export async function PUT(request: NextRequest) {
       description: body.description,
       cover_color: body.cover_color,
       genre: body.genre,
+      affiliate_link: body.affiliate_link,
     };
+
+    if (body.cover_image_url !== undefined) updatePayload.cover_image_url = body.cover_image_url;
 
     if (body.recommended_by !== undefined) updatePayload.recommended_by = body.recommended_by;
     if (body.recommendation_reason !== undefined) updatePayload.recommendation_reason = body.recommendation_reason;
@@ -130,25 +135,21 @@ export async function PUT(request: NextRequest) {
       throw updateError;
     }
 
-    // Save cover_image_url if provided
-    if (body.cover_image_url) {
-      try {
-        await supabase
-          .from('books')
-          .update({ cover_image_url: body.cover_image_url })
-          .eq('id', id);
-      } catch (err) {
-        console.log('Could not save cover_image_url directly, will persist in state');
+    // Return updated book (should include persisted fields)
+    const updatedId = updateData?.[0]?.id || id;
+    if (updatedId) {
+      const { data: fetched, error: fetchErr } = await supabase
+        .from('books')
+        .select('*')
+        .eq('id', updatedId)
+        .maybeSingle();
+      if (fetchErr) {
+        console.error('Failed to re-fetch updated book:', fetchErr);
       }
+      return NextResponse.json({ book: fetched || updateData?.[0] });
     }
 
-    // Return book with cover_image_url included for frontend
-    const book = updateData?.[0];
-    if (book && body.cover_image_url) {
-      book.cover_image_url = body.cover_image_url;
-    }
-
-    return NextResponse.json({ book });
+    return NextResponse.json({ book: updateData?.[0] });
   } catch (error) {
     console.error('Error updating book:', error);
     return NextResponse.json({ error: 'Failed to update book' }, { status: 500 });

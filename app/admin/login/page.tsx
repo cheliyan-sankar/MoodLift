@@ -25,37 +25,55 @@ export default function AdminLogin() {
 
     try {
       const { error: signInError } = await signIn(email, password);
-      
+
       if (signInError) {
-        setError('Invalid email or password');
+        const message = (signInError as any)?.message || 'Invalid email or password';
+        setError(message);
         setLoading(false);
         return;
       }
 
       // Check if user is admin
-      const response = await fetch('/api/admin/check-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+      let response: Response;
+      try {
+        response = await fetch('/api/admin/check-admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+      } catch (fetchErr) {
+        console.error('Network error while checking admin:', fetchErr);
+        setError('Network error: could not reach server. ' + ((fetchErr as any)?.message || ''));
+        setLoading(false);
+        return;
+      }
 
-      const data = await response.json();
+      let data: any = {};
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        console.error('Failed to parse admin check response:', parseErr);
+        setError(`Unexpected server response (${response.status})`);
+        setLoading(false);
+        return;
+      }
 
-      if (data.error) {
-        setError(data.error || 'Server configuration error');
+      if (!response.ok) {
+        setError(data?.error || `Server error: ${response.status}`);
         setLoading(false);
         return;
       }
 
       if (!data.isAdmin) {
-        setError('You do not have admin access');
+        setError(data.error || 'You do not have admin access');
         setLoading(false);
         return;
       }
 
       router.push('/admin/dashboard');
     } catch (err) {
-      setError('An error occurred during login. Please check your connection.');
+      console.error('Login error:', err);
+      setError('An unexpected error occurred: ' + ((err as any)?.message || String(err)));
       setLoading(false);
     }
   };

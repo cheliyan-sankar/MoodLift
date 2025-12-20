@@ -38,6 +38,7 @@ interface Book {
   recommendation_reason?: string;
   amazon_affiliate_link?: string;
   flipkart_affiliate_link?: string;
+  affiliate_link?: string;
 }
 
 interface Game {
@@ -213,6 +214,8 @@ export default function AdminDashboard() {
     }
   };
 
+  // Note: book file uploads removed; use affiliate links instead.
+
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -273,12 +276,21 @@ export default function AdminDashboard() {
         body: JSON.stringify(selectedBook),
       });
 
-      if (!response.ok) throw new Error('Failed to save book');
-      
+      const data = await response.json();
+      if (!response.ok) {
+        console.error('Save book error:', data);
+        throw new Error(data?.error || 'Failed to save book');
+      }
+
+      const savedBook = data?.book;
       setSuccess('Book saved successfully!');
       await fetchBooks();
       setIsAddingBook(false);
-      setSelectedBook(null);
+      if (savedBook) {
+        setSelectedBook(savedBook);
+      } else {
+        setSelectedBook(null);
+      }
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
       setError('Failed to save book');
@@ -384,6 +396,7 @@ export default function AdminDashboard() {
       recommendation_reason: '',
       amazon_affiliate_link: '',
       flipkart_affiliate_link: '',
+      affiliate_link: '',
     });
   };
 
@@ -742,6 +755,8 @@ export default function AdminDashboard() {
                         </div>
                       </div>
 
+                      {/* Removed file upload UI — affiliate links will be used instead */}
+
                       <div className="space-y-2">
                         <label className="text-sm font-medium">Cover Image</label>
                         <div 
@@ -843,6 +858,15 @@ export default function AdminDashboard() {
                             value={selectedBook.flipkart_affiliate_link || ''}
                             onChange={(e) => setSelectedBook({...selectedBook, flipkart_affiliate_link: e.target.value})}
                             placeholder="https://flipkart.com/..."
+                          />
+                        </div>
+
+                        <div className="space-y-2 mb-4">
+                          <label className="text-sm font-medium">Affiliate / External Link</label>
+                          <Input
+                            value={(selectedBook as any).affiliate_link || ''}
+                            onChange={(e) => setSelectedBook({...selectedBook, affiliate_link: e.target.value})}
+                            placeholder="https://example.com/book-page-or-affiliate"
                           />
                         </div>
                       </div>
