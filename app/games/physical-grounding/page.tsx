@@ -200,7 +200,7 @@ export default function PhysicalGroundingGame() {
 
             {/* Animation */}
             <div className="flex justify-center mb-12">
-              <div className="w-full max-w-md aspect-[3/1] bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <div className="w-64 h-16 sm:w-80 sm:h-20 md:w-96 md:h-24 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-30">
                   <div className="absolute inset-4 border-2 border-teal-400 rounded-xl" />
                   <div className="absolute inset-8 border-2 border-teal-400 rounded-lg" />
