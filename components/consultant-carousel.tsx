@@ -39,8 +39,8 @@ export default function ConsultantCarousel() {
       );
 
     return (
-      <div className="rounded-3xl bg-card text-card-foreground shadow-sm border-2 p-4">
-        <div className="aspect-square w-full rounded-3xl bg-muted overflow-hidden">
+      <div className="rounded-2xl bg-card text-card-foreground shadow-sm border-2 p-3">
+        <div className="aspect-[4/3] w-full rounded-2xl bg-muted overflow-hidden">
           {consultant.picture_url ? (
             <img
               src={consultant.picture_url}
@@ -51,24 +51,24 @@ export default function ConsultantCarousel() {
           ) : null}
         </div>
 
-        <div className="mt-3">
-          <div className="inline-flex max-w-full rounded-full bg-primary/10 px-4 py-1">
-            <span className="truncate text-sm font-semibold uppercase tracking-widest text-primary">
+        <div className="mt-2">
+          <div className="inline-flex max-w-full rounded-full bg-primary/10 px-3 py-1">
+            <span className="truncate text-xs sm:text-sm font-semibold uppercase tracking-widest text-primary">
               {name}
             </span>
           </div>
         </div>
 
-        <div className="mt-3 flex items-center justify-between gap-3">
+        <div className="mt-2 flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2">
-            <Heart className="h-5 w-5 text-destructive" fill="currentColor" />
-            <span className="truncate text-sm font-semibold uppercase tracking-widest text-primary">
+            <Heart className="h-4 w-4 text-destructive" fill="currentColor" />
+            <span className="truncate text-xs sm:text-sm font-semibold uppercase tracking-widest text-primary">
               {title}
             </span>
           </div>
 
           <Action>
-            <Button className="rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-widest">
+            <Button className="rounded-full px-3 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest">
               Consult Now
             </Button>
           </Action>

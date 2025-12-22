@@ -73,7 +73,7 @@ function DiscoverContent() {
               <Heart className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">Your Favorites</h2>
+              <h2 className="section-title font-bold text-primary">Your Favorites</h2>
               <p className="text-muted-foreground">
                 Quick access to your pinned games and books
               </p>
@@ -89,7 +89,7 @@ function DiscoverContent() {
               <Gamepad2 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">All Activities</h2>
+              <h2 className="section-title font-bold text-primary">All Activities</h2>
               <p className="text-muted-foreground">
                 Breathing exercises and grounding techniques for your wellness
               </p>
@@ -104,7 +104,7 @@ function DiscoverContent() {
               <BookOpen className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">Book Recommendations</h2>
+              <h2 className="section-title font-bold text-primary">Book Recommendations</h2>
               <p className="text-muted-foreground">
                 Curated reading list for personal growth and mental health
               </p>

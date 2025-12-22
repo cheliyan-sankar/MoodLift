@@ -105,7 +105,7 @@ export default function AllActivities() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
         <div className="mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">All Activities & Favorites</h2>
+          <h2 className="section-title font-bold text-gray-900 mb-2">All Activities & Favorites</h2>
           <p className="text-gray-600">Explore all therapeutic exercises to support your wellness</p>
         </div>
 

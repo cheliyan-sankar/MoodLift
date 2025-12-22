@@ -70,7 +70,7 @@ export function FAQSection({ title, items = [], page, schemaType = 'HomePage' }:
       <section className="py-6 sm:py-8 bg-gradient-to-br from-white via-secondary/20 to-accent/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">{title}</h2>
+            <h2 className="section-title font-bold text-primary mb-2">{title}</h2>
             <p className="text-base text-muted-foreground">
               Find answers to common questions about MoodLift
             </p>

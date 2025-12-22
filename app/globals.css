@@ -102,3 +102,9 @@
     }
   }
 }
+
+@layer components {
+  .section-title {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+}

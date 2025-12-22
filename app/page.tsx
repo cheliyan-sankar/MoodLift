@@ -378,7 +378,7 @@ export default function Home() {
         </div>
 
         <div className="mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl font-semibold text-primary mb-6 text-center">
+          <h2 className="section-title font-semibold text-primary mb-6 text-center">
             {user ? (
               <>
                 How are you feeling today?{' '}
@@ -441,7 +441,7 @@ export default function Home() {
         {/* Most Popular Activity Session */}
         <div className="mb-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">
+            <h2 className="section-title font-bold text-primary mb-2">
               Most Popular Activities
             </h2>
           </div>
@@ -475,7 +475,7 @@ export default function Home() {
                           <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
                             {g.title}
                           </h3>
-                          <p className="text-sm text-primary/60 leading-relaxed">{g.description}</p>
+                          <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">{g.description}</p>
 
                           <div className="mt-auto pt-3 flex justify-center">
                             <Button className="w-[120px] h-[32px] px-0 rounded-full bg-primary text-white hover:bg-primary/90 text-sm font-semibold leading-none">
@@ -504,7 +504,7 @@ export default function Home() {
                         <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
                           Box Breathing
                         </h3>
-                        <p className="text-sm text-primary/60 leading-relaxed">A simple breathing technique supported by CBT principles to help reduce stress.</p>
+                        <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">A simple breathing technique supported by CBT principles to help reduce stress.</p>
                         <div className="mt-auto pt-3 flex justify-center">
                           <Button className="w-[120px] h-[32px] px-0 rounded-full bg-primary text-white hover:bg-primary/90 text-sm font-semibold leading-none">
                             Start Now
@@ -528,7 +528,7 @@ export default function Home() {
                         <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
                           Diaphragmatic Breathing
                         </h3>
-                        <p className="text-sm text-primary/60 leading-relaxed">Deep belly breathing that activates your parasympathetic nervous system for instant calm.</p>
+                        <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">Deep belly breathing that activates your parasympathetic nervous system for instant calm.</p>
                         <div className="mt-auto pt-3 flex justify-center">
                           <Button className="w-[120px] h-[32px] px-0 rounded-full bg-primary text-white hover:bg-primary/90 text-sm font-semibold leading-none">
                             Start Now
@@ -552,7 +552,7 @@ export default function Home() {
                         <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
                           4-7-8 Breathing
                         </h3>
-                        <p className="text-sm text-primary/60 leading-relaxed">The famous 4-7-8 technique for anxiety relief and better sleep.</p>
+                        <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">The famous 4-7-8 technique for anxiety relief and better sleep.</p>
                         <div className="mt-auto pt-3 flex justify-center">
                           <Button className="w-[120px] h-[32px] px-0 rounded-full bg-primary text-white hover:bg-primary/90 text-sm font-semibold leading-none">
                             Start Now
@@ -568,18 +568,18 @@ export default function Home() {
         </div>
 
         <Card className="mb-12 overflow-hidden rounded-[24px] border-2 border-secondary/60 bg-secondary/15">
-          <CardContent className="p-5 sm:p-7 md:p-10">
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="flex items-start gap-6 flex-1">
-                <div className="shrink-0 w-[88px] h-[88px] rounded-[24px] bg-primary flex items-center justify-center">
-                  <ClipboardList className="w-10 h-10 text-white" aria-hidden />
+          <CardContent className="p-4 sm:p-5 md:p-7">
+            <div className="flex flex-col md:flex-row md:items-center gap-5">
+              <div className="flex items-start gap-5 flex-1">
+                <div className="shrink-0 w-[72px] h-[72px] rounded-[20px] bg-primary flex items-center justify-center">
+                  <ClipboardList className="w-8 h-8 text-white" aria-hidden />
                 </div>
 
                 <div className="min-w-0">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-tight">
+                  <h2 className="section-title font-bold text-primary leading-tight">
                     Confused About Your Mental State?
                   </h2>
-                  <p className="mt-2 text-base sm:text-lg text-muted-foreground leading-relaxed">
+                  <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
                     Take a short scientifically validated assessment to get clarity on your mood, stress, or anxiety.
                   </p>
                 </div>
@@ -587,7 +587,7 @@ export default function Home() {
 
               <div className="w-full md:w-auto md:ml-auto">
                 <Button
-                  className="w-full md:w-auto h-12 sm:h-14 rounded-full px-10 bg-primary hover:bg-primary/90 text-base sm:text-lg font-semibold"
+                  className="w-full md:w-auto h-10 sm:h-12 rounded-full px-8 bg-primary hover:bg-primary/90 text-sm sm:text-base font-semibold"
                   onClick={handleAssessmentClick}
                 >
                   Start Assessment
@@ -601,7 +601,7 @@ export default function Home() {
 
         <div className="mt-12 sm:mt-16 md:mt-24">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-primary mb-4">
+            <h2 className="section-title font-bold text-primary mb-4">
               What Our Users Say
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

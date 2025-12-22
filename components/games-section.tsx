@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Pin, Play } from 'lucide-react';
+import { Heart, Play } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/auth-context';
 import {
@@ -275,7 +275,7 @@ export function GamesSection() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <Card key={i} className="border-2 animate-pulse">
             <div className="h-32 sm:h-40 bg-gray-200 rounded-t-lg" />
@@ -320,89 +320,67 @@ export function GamesSection() {
           return (
             <Card
               key={game.id}
-              className="group relative border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer"
+              className="group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => handleCardClick(game)}
             >
-              {/* Removed decorative gradient bar to prioritize cover images */}
+              <div className="flex h-full flex-col p-4 sm:p-5">
+                <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
+                  <GameCover
+                    src={game.cover_image_url}
+                    title={game.title}
+                    wrapperClass="h-full w-full"
+                    imgClass="h-full w-full object-cover"
+                  />
 
-            {user && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  togglePin(game.id);
-                }}
-                className={`absolute top-4 right-4 z-10 transition-all duration-300 ${
-                  isPinned
-                    ? 'text-white bg-white/20 backdrop-blur-sm hover:bg-white/30'
-                    : 'text-gray-400 hover:text-gray-600 hover:bg-white/50 backdrop-blur-sm'
-                }`}
-                aria-label={isPinned ? 'Unpin game' : 'Pin game'}
-              >
-                <Pin
-                  className={`w-5 h-5 transition-transform duration-300 ${
-                    isPinned ? 'fill-current rotate-45' : ''
-                  }`}
-                />
-              </Button>
-            )}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    disabled={!user}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!user) return;
+                      togglePin(game.id);
+                    }}
+                    className="absolute right-3 top-3 h-9 w-9 rounded-full bg-transparent p-0 hover:bg-transparent focus-visible:ring-0"
+                    aria-label={isPinned ? 'Unpin game' : 'Pin game'}
+                  >
+                    <Heart
+                      className={`h-7 w-7 sm:h-8 sm:w-8 ${isPinned ? 'text-red-500' : 'text-[#D9D9D9]'}`}
+                      style={{
+                        fill: 'currentColor',
+                        stroke: 'none',
+                        opacity: user ? 1 : 0.6,
+                      }}
+                    />
+                  </Button>
+                </div>
 
-            <div className="relative">
-              <div
-                className="h-12 w-full"
-                style={{
-                  background: `linear-gradient(90deg, ${parsedFrom}, ${parsedTo})`,
-                }}
-              />
+                <div className="mt-[11px]">
+                  <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">
+                    {game.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">
+                    {game.description}
+                  </p>
+                </div>
 
-              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-10 z-20">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 dark:bg-gray-800/80 flex items-center justify-center shadow-md border">
-                  <div className="text-2xl sm:text-3xl">{getIconComponent(game.icon)}</div>
+                <div className="mt-auto flex items-end justify-between pt-3">
+                  <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">
+                    {game.category}
+                  </span>
+                  <Button
+                    size="sm"
+                    className="h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[11px] sm:text-[12px] font-semibold text-white hover:bg-[#450BC8]/90"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCardClick(game);
+                    }}
+                  >
+                    PLAY NOW
+                  </Button>
                 </div>
               </div>
-
-              <GameCover
-                src={game.cover_image_url}
-                title={game.title}
-                wrapperClass="relative h-28 sm:h-32 md:h-36 overflow-hidden transition-transform duration-300 group-hover:scale-105 mt-2"
-                imgClass="w-full h-full object-cover"
-              />
-            </div>
-
-            <CardContent className="p-4 sm:p-5 md:p-6">
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
-                  {game.title}
-                </h3>
-              </div>
-              <p className="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-2">
-                {game.description}
-              </p>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                <span
-                  className="text-xs font-semibold px-2 sm:px-3 py-1 rounded-full whitespace-nowrap"
-                  style={{
-                    background: `linear-gradient(to right, ${parsedFrom}20, ${parsedTo}20)`,
-                    color: parsedFrom,
-                  }}
-                >
-                  {game.category}
-                </span>
-                <Button
-                  size="sm"
-                  className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity text-xs sm:text-sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCardClick(game);
-                  }}
-                >
-                  <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  Play
-                </Button>
-              </div>
-            </CardContent>
           </Card>
         );
       })}

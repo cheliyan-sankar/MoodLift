@@ -57,7 +57,7 @@ function GamesHubContent() {
               <Gamepad2 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">All Activities & Games</h2>
+              <h2 className="section-title font-bold text-primary">All Activities & Games</h2>
               <p className="text-muted-foreground">
                 Breathing exercises and grounding techniques for your wellness
               </p>
@@ -71,7 +71,7 @@ function GamesHubContent() {
             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4">
               <Heart className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">Pin Your Favorites</h3>
+            <h3 className="section-title font-bold mb-4">Pin Your Favorites</h3>
             <p className="text-base sm:text-lg mb-4 sm:mb-6 text-white/90 max-w-2xl mx-auto">
               Click the pin icon on any game to save it to your favorites. Track your progress and create a personalized wellness collection.
             </p>

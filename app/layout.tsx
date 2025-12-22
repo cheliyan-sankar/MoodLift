@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/lib/auth-context';
 import StructuredData from '@/components/structured-data';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'MoodLift - AI-Powered Emotional Wellness',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} font-sans`}>
         <AuthProvider>
           {/* Base WebSite schema for all pages */}
           <StructuredData
