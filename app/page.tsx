@@ -472,7 +472,7 @@ export default function Home() {
                         </div>
 
                         <div className="px-6 pb-6 pt-3 flex-1 flex flex-col gap-3">
-                          <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
+                          <h3 className="line-clamp-2 capitalize text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8] text-center">
                             {g.title}
                           </h3>
                           <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">{g.description}</p>
@@ -501,7 +501,7 @@ export default function Home() {
                       </div>
 
                       <div className="px-6 pb-6 pt-3 flex-1 flex flex-col gap-3">
-                        <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
+                        <h3 className="line-clamp-2 capitalize text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8] text-center">
                           Box Breathing
                         </h3>
                         <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">A simple breathing technique supported by CBT principles to help reduce stress.</p>
@@ -525,7 +525,7 @@ export default function Home() {
                       </div>
 
                       <div className="px-6 pb-6 pt-3 flex-1 flex flex-col gap-3">
-                        <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
+                        <h3 className="line-clamp-2 capitalize text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8] text-center">
                           Diaphragmatic Breathing
                         </h3>
                         <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">Deep belly breathing that activates your parasympathetic nervous system for instant calm.</p>
@@ -549,7 +549,7 @@ export default function Home() {
                       </div>
 
                       <div className="px-6 pb-6 pt-3 flex-1 flex flex-col gap-3">
-                        <h3 className="inline-flex self-center items-center justify-center rounded-full bg-secondary/50 px-5 h-[28px] text-[14px] font-semibold leading-none text-primary whitespace-nowrap uppercase text-center">
+                        <h3 className="line-clamp-2 capitalize text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8] text-center">
                           4-7-8 Breathing
                         </h3>
                         <p className="text-sm text-primary/60 leading-relaxed line-clamp-4">The famous 4-7-8 technique for anxiety relief and better sleep.</p>
