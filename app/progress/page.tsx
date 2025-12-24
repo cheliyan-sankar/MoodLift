@@ -171,7 +171,7 @@ function ProgressContent() {
               </div>
               <div className="p-4 bg-secondary/30 rounded-lg">
                 <p className="text-sm text-muted-foreground mb-1">Current Streak</p>
-                <p className="text-lg sm:text-xl md:text-2xl font-bold text-accent">{currentStreak} days</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-bold text-accent">{currentStreak > 0 ? `${currentStreak} days` : '-'}</p>
               </div>
             </div>
           </CardContent>

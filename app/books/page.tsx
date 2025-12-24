@@ -9,6 +9,7 @@ import { MoodBasedBooks } from '@/components/mood-based-books';
 import { AppFooter } from '@/components/app-footer';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/auth-context';
+import { SiteHeader } from '@/components/site-header';
 import {
   Select,
   SelectContent,
@@ -84,23 +85,7 @@ export default function BooksPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-secondary/20 to-accent/10">
-      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Home
-                </Button>
-              </Link>
-              <h1 className="text-xl font-bold text-primary">
-                Book Recommendations
-              </h1>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
         <div className="text-center mb-12">

@@ -150,7 +150,7 @@ function UserProfileComponent() {
                 <div>
                   <p className="text-xs text-gray-600">Current Streak</p>
                   <p className="text-lg font-bold" style={{ color: 'hsl(var(--primary))' }}>
-                    {currentStreak} days
+                    {currentStreak > 0 ? `${currentStreak} days` : '-'}
                   </p>
                 </div>
               </div>

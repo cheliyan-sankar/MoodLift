@@ -442,15 +442,6 @@ export default function PsychometricAssessment() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
         {!selectedTest && (
           <>
-            {/* Assessment illustration - place the provided PNG at /public/images/assessment-illustration.png */}
-            <div className="mb-8 flex items-center justify-center">
-              <img
-                src="/images/assessment-illustration.png"
-                alt="Assessment illustration"
-                className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg shadow-lg"
-                loading="lazy"
-              />
-            </div>
             <Card className="mb-8 border-2 border-[#3C1F71]/20">
               <CardHeader className="bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] text-white">
                 <CardTitle className="text-2xl flex items-center gap-2">

@@ -210,7 +210,7 @@ export function AfterLoginHeader() {
                           <div>
                             <p className="text-xs text-gray-600">Current Streak</p>
                             <p className="text-lg font-bold" style={{ color: '#3C1F71' }}>
-                              {currentStreak} days
+                              {currentStreak > 0 ? `${currentStreak} days` : '-'}
                             </p>
                           </div>
                         </div>
