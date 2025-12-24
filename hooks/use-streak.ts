@@ -74,8 +74,36 @@ export function useStreak(): UseStreakResult {
       const today = getToday();
 
       if (!streakData) {
-        setError('Streak data not loaded');
-        return null;
+        // New user, create initial streak record
+        const { error: insertError } = await supabase
+          .from('user_streaks')
+          .insert({
+            user_id: user.id,
+            current_streak: 1,
+            longest_streak: 1,
+            last_login_date: today,
+            updated_at: new Date().toISOString(),
+          });
+
+        if (insertError) {
+          setError(insertError.message);
+          return null;
+        }
+
+        const newStreakData = {
+          currentStreak: 1,
+          longestStreak: 1,
+          lastLoginDate: today,
+        };
+
+        setStreakData(newStreakData);
+
+        return {
+          currentStreak: 1,
+          longestStreak: 1,
+          isNewStreak: true,
+          streakBroken: false,
+        };
       }
 
       const streakUpdate = calculateStreakUpdate(

@@ -199,9 +199,8 @@ export function QuoteCarousel() {
               </div>
             </div>
 
-            {/* Streak box — placed to the right of the quote on md+ screens */}
             <div className="w-full md:w-[35%] flex items-start justify-center md:justify-end">
-              <div className="w-36 h-36 md:w-44 md:h-44 flex flex-col items-center justify-center p-4 border border-accent/30 rounded-xl ring-4 ring-orange-400 shadow-2xl scale-105 animate-pulse" style={{ backgroundColor: '#FFF7ED' }}>
+              <div className="w-40 h-40 md:w-52 md:h-52 flex flex-col items-center justify-center p-4 border border-accent/30 rounded-xl ring-4 ring-orange-400 shadow-2xl scale-105 animate-pulse" style={{ backgroundColor: '#FFF7ED' }}>
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center transition-transform duration-500 scale-110 animate-bounce mb-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-flame w-6 h-6 text-white"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
                 </div>

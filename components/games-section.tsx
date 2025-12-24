@@ -307,7 +307,7 @@ export function GamesSection() {
                 </div>
 
                 <div className="mt-[11px]">
-                  <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">
+                  <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">
                     {game.title}
                   </h3>
                   <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">
@@ -316,12 +316,12 @@ export function GamesSection() {
                 </div>
 
                 <div className="mt-auto flex items-end justify-between pt-3">
-                  <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">
+                  <span className="text-[12px] sm:text-[13px] font-semibold text-primary">
                     {game.category}
                   </span>
                   <Button
                     size="sm"
-                    className="h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[11px] sm:text-[12px] font-semibold text-white hover:bg-[#450BC8]/90"
+                    className="h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[11px] sm:text-[12px] font-semibold text-white hover:bg-primary/90"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleCardClick(game);

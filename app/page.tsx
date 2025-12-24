@@ -426,12 +426,11 @@ export default function Home() {
                   <Link key={idx} href={rec.url}>
                     <Card className="border-2 cursor-pointer hover:shadow-lg transition-all h-full">
                       <CardHeader>
-                        <div className="text-4xl mb-2">{rec.emoji}</div>
                         <CardTitle className="text-lg">{rec.title}</CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
                         <p className="text-sm text-muted-foreground">{rec.description}</p>
-                        <p className="text-xs text-accent font-medium">✨ {rec.reason}</p>
+                        <p className="text-xs text-accent font-medium">{rec.reason}</p>
                         <Button className="w-full sm:w-auto bg-gradient-to-r text-xs sm:text-sm md:text-base from-primary to-accent hover:opacity-90">
                           Play Now
                         </Button>
@@ -467,7 +466,7 @@ export default function Home() {
 
                 return (
                   <Link key={g.id} href={`/games/${slug}`} className="md:col-span-1">
-                    <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer">
+                    <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer perspective-1000 hover:transform hover:rotate-x-6 hover:rotate-y-6 hover:scale-105 transition-all duration-300">
                       <div className="flex h-full flex-col p-4 sm:p-5">
                         <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
                           {g.cover_image_url ? (
@@ -479,12 +478,12 @@ export default function Home() {
                           )}
                         </div>
                         <div className="mt-[11px]">
-                          <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">{g.title}</h3>
+                          <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">{g.title}</h3>
                           <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">{g.description}</p>
                         </div>
                         <div className="mt-auto flex items-end justify-between pt-3">
-                          <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">{g.category}</span>
-                          <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-[#450BC8]/90">PLAY NOW</button>
+                          <span className="text-[12px] sm:text-[13px] font-semibold text-primary">{g.category}</span>
+                          <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-primary/90">PLAY NOW</button>
                         </div>
                       </div>
                     </div>
@@ -495,7 +494,7 @@ export default function Home() {
               // fallback static content if no popular games set
               <>
                 <Link href="/games/box-breathing" className="md:col-span-1">
-                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer">
+                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer perspective-1000 hover:transform hover:rotate-x-6 hover:rotate-y-6 hover:scale-105 transition-all duration-300">
                     <div className="flex h-full flex-col p-4 sm:p-5">
                       <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
                         <div className="h-full w-full relative bg-gray-100 flex items-center justify-center">
@@ -503,37 +502,37 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="mt-[11px]">
-                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">Box Breathing</h3>
+                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">Box Breathing</h3>
                         <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">A simple breathing technique supported by CBT principles to help reduce stress.</p>
                       </div>
                       <div className="mt-auto flex items-end justify-between pt-3">
-                        <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">Breathing</span>
-                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-[#450BC8]/90">PLAY NOW</button>
+                        <span className="text-[12px] sm:text-[13px] font-semibold text-primary">Breathing</span>
+                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-primary/90">PLAY NOW</button>
                       </div>
                     </div>
                   </div>
                 </Link>
 
                 <Link href="/games/diaphragmatic-breathing" className="md:col-span-1">
-                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer">
+                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer perspective-1000 hover:transform hover:rotate-x-6 hover:rotate-y-6 hover:scale-105 transition-all duration-300">
                     <div className="flex h-full flex-col p-4 sm:p-5">
                       <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
                         <img src="https://vsarsdunppymyunnjmqk.supabase.co/storage/v1/object/public/assets/1766410867830-download (3).jfif" alt="Diaphragmatic Breathing" className="absolute inset-0 w-full h-full object-cover" />
                       </div>
                       <div className="mt-[11px]">
-                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">Diaphragmatic Breathing</h3>
+                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">Diaphragmatic Breathing</h3>
                         <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">Deep belly breathing that activates your parasympathetic nervous system for instant calm and stress relief.</p>
                       </div>
                       <div className="mt-auto flex items-end justify-between pt-3">
-                        <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">Breathing</span>
-                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-[#450BC8]/90">PLAY NOW</button>
+                        <span className="text-[12px] sm:text-[13px] font-semibold text-primary">Breathing</span>
+                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-primary/90">PLAY NOW</button>
                       </div>
                     </div>
                   </div>
                 </Link>
 
                 <Link href="/games/four-seven-eight-breathing" className="md:col-span-1">
-                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer">
+                  <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-0 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer perspective-1000 hover:transform hover:rotate-x-6 hover:rotate-y-6 hover:scale-105 transition-all duration-300">
                     <div className="flex h-full flex-col p-4 sm:p-5">
                       <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
                         <div className="h-full w-full relative bg-gray-100 flex items-center justify-center">
@@ -541,12 +540,12 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="mt-[11px]">
-                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-[#450BC8]">4-7-8 Breathing</h3>
+                        <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">4-7-8 Breathing</h3>
                         <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">The famous 4-7-8 technique for anxiety relief and better sleep.</p>
                       </div>
                       <div className="mt-auto flex items-end justify-between pt-3">
-                        <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">Breathing</span>
-                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-[#450BC8] px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-[#450BC8]/90">PLAY NOW</button>
+                        <span className="text-[12px] sm:text-[13px] font-semibold text-primary">Breathing</span>
+                        <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-primary/90">PLAY NOW</button>
                       </div>
                     </div>
                   </div>

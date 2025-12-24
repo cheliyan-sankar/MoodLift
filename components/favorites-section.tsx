@@ -208,7 +208,7 @@ export function FavoritesSection() {
               </div>
 
                 <div className="mt-[10px]">
-                <h3 className="line-clamp-2 text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[1.2] text-[#450BC8]">
+                <h3 className="line-clamp-2 text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[1.2] text-primary">
                   {item.title}
                 </h3>
                 <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">
@@ -217,13 +217,13 @@ export function FavoritesSection() {
               </div>
 
               <div className="mt-auto flex items-end justify-between pt-3">
-                <span className="text-[12px] sm:text-[13px] font-semibold text-[#450BC8]">
+                <span className="text-[12px] sm:text-[13px] font-semibold text-primary">
                   {item.category || item.genre}
                 </span>
                 {isGame ? (
                   <Button
                     size="sm"
-                            className="h-7 sm:h-8 w-[100px] sm:w-[120px] rounded-[14px] bg-[#450BC8] px-0 text-[10px] sm:text-[11px] font-semibold text-white hover:bg-[#450BC8]/90"
+                            className="h-7 sm:h-8 w-[100px] sm:w-[120px] rounded-[14px] bg-primary px-0 text-[10px] sm:text-[11px] font-semibold text-white hover:bg-primary/90"
                             onClick={(e) => {
                               e.stopPropagation();
                               // Navigate to game page - create a slug from title if available
@@ -237,7 +237,7 @@ export function FavoritesSection() {
                 ) : (
                   <Button
                     size="sm"
-                            className="h-7 sm:h-8 w-[100px] sm:w-[120px] rounded-[14px] bg-[#450BC8] px-0 text-[10px] sm:text-[11px] font-semibold text-white hover:bg-[#450BC8]/90"
+                            className="h-7 sm:h-8 w-[100px] sm:w-[120px] rounded-[14px] bg-primary px-0 text-[10px] sm:text-[11px] font-semibold text-white hover:bg-primary/90"
                             onClick={(e) => {
                               e.stopPropagation();
                               router.push(`/books/${item.id}`);
