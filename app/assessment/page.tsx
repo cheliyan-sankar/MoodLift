@@ -445,7 +445,7 @@ export default function PsychometricAssessment() {
     let mounted = true;
     const fetchConsultants = async () => {
       try {
-        const res = await fetch('/api/consultants?featured=true', { cache: 'no-store' });
+        const res = await fetch('/api/consultants', { cache: 'no-store' });
         const json = await res.json().catch(() => ({}));
         if (!mounted) return;
         setConsultantsList((json?.consultants as ConsultantSimple[]) || []);

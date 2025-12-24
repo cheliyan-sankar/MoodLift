@@ -47,7 +47,7 @@ export default function Home() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [recommendations, setRecommendations] = useState<Game[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const displayName = user?.user_metadata?.full_name || user?.email || 'User';
@@ -125,7 +125,50 @@ export default function Home() {
     }
     
     const gameRecommendations = getGameRecommendations(moodId as MoodType);
-    setRecommendations(gameRecommendations);
+
+    // Fetch games from the DB that match the recommended game titles.
+    try {
+      const titles = gameRecommendations.map((r) => r.title);
+      const { data: matchedGames } = await supabase
+        .from('games')
+        .select('*')
+        .in('title', titles);
+
+      // Preserve the order of recommendations and filter out missing games
+      let ordered: Game[] = [];
+      if (matchedGames && Array.isArray(matchedGames)) {
+        const byTitle = new Map<string, any>(matchedGames.map((g: any) => [g.title, g]));
+        ordered = gameRecommendations
+          .map((r) => byTitle.get(r.title))
+          .filter(Boolean) as Game[];
+      }
+
+      // If fewer than 3 matched games, fill with additional recent games (excluding ones already added)
+      if (ordered.length < 3) {
+        const { data: candidates } = await supabase
+          .from('games')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(10);
+
+        if (candidates && Array.isArray(candidates)) {
+          const existing = new Set(ordered.map((g) => g.title));
+          for (const c of candidates) {
+            if (ordered.length >= 3) break;
+            if (!existing.has(c.title)) {
+              ordered.push(c as Game);
+              existing.add(c.title);
+            }
+          }
+        }
+      }
+
+      // Ensure exactly 3 recommendations
+      setRecommendations(ordered.slice(0, 3));
+    } catch (e) {
+      console.error('Failed to fetch recommended games:', e);
+      setRecommendations([]);
+    }
   };
 
   useEffect(() => {
@@ -446,23 +489,36 @@ export default function Home() {
           {recommendations.length > 0 && (
             <div className="mt-12 max-w-4xl mx-auto">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-primary mb-6 text-center">Recommended for you</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {recommendations.map((rec, idx) => (
-                  <Link key={idx} href={rec.url}>
-                    <Card className="border-2 cursor-pointer hover:shadow-lg transition-all h-full">
-                      <CardHeader>
-                        <CardTitle className="text-lg">{rec.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <p className="text-sm text-muted-foreground">{rec.description}</p>
-                        <p className="text-xs text-accent font-medium">{rec.reason}</p>
-                        <Button className="w-full sm:w-auto bg-gradient-to-r text-xs sm:text-sm md:text-base from-primary to-accent hover:opacity-90">
-                          Play Now
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {recommendations.map((g) => {
+                  const slug = g.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+                  return (
+                    <Link key={g.id} href={`/games/${slug}`} className="md:col-span-1">
+                      <div className="text-card-foreground group relative w-full max-w-[420px] aspect-square rounded-[24px] bg-white border-2 border-secondary/80 shadow-[0_8px_16px_rgba(75,52,37,0.05)] overflow-hidden animate-in fade-in-50 slide-in-from-bottom-4 cursor-pointer perspective-1000 hover:transform hover:rotate-x-6 hover:rotate-y-6 hover:scale-105 transition-all duration-300">
+                        <div className="flex h-full flex-col p-4 sm:p-5">
+                          <div className="relative h-[46%] w-full overflow-hidden rounded-[24px] bg-[#D9D9D9]">
+                            {g.cover_image_url ? (
+                              <img src={g.cover_image_url} alt={g.title} className="absolute inset-0 w-full h-full object-cover" />
+                            ) : (
+                              <div className="h-full w-full relative bg-gray-100 flex items-center justify-center">
+                                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-600">{g.title.charAt(0).toUpperCase()}</div>
+                              </div>
+                            )}
+                          </div>
+                          <div className="mt-[11px]">
+                            <h3 className="line-clamp-2 text-[18px] sm:text-[20px] md:text-[22px] font-semibold leading-[1.2] text-primary">{g.title}</h3>
+                            <p className="mt-2 line-clamp-3 text-[12px] sm:text-[13px] leading-[1.35] text-[rgba(31,22,15,0.64)]">{g.description}</p>
+                          </div>
+                          <div className="mt-auto flex items-end justify-between pt-3">
+                            <span className="text-[12px] sm:text-[13px] font-semibold text-primary">{g.category}</span>
+                            <button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 sm:h-9 w-[120px] sm:w-[140px] rounded-[16px] bg-primary px-0 text-[13px] sm:text-[14px] font-semibold text-white hover:bg-primary/90">PLAY NOW</button>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           )}

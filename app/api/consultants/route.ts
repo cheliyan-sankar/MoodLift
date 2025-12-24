@@ -35,30 +35,23 @@ function createServerClient() {
   return createClient(supabaseUrl, keyToUse);
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const supabase = createServerClient();
 
-    const url = new URL(request.url);
-    const featuredParam = url.searchParams.get('featured');
-
-    let query = supabase
+    const { data, error } = await supabase
       .from('consultants')
-      .select('id, full_name, title, picture_url, booking_url, is_active, created_at, is_featured')
+      .select('id, full_name, title, picture_url, booking_url, is_active, created_at')
       .eq('is_active', true)
-      .order('created_at', { ascending: false });
-
-    if (featuredParam && featuredParam.toLowerCase() === 'true') {
-      query = (query as any).eq('is_featured', true);
-    }
-
-    const { data, error } = await (query as any).limit(12);
+      .order('created_at', { ascending: false })
+      .limit(12);
 
     if (error) throw new Error(extractErrorMessage(error));
 
     return NextResponse.json({ consultants: data || [] });
   } catch (err) {
     console.error('Error fetching public consultants:', err);
+    // Don’t fail the page; return empty list and a message for debugging.
     return NextResponse.json({ consultants: [], error: extractErrorMessage(err) }, { status: 200 });
   }
 }
