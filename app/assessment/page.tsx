@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Brain, ArrowLeft, CheckCircle2, Sparkles, TrendingUp, Loader2, Heart, Activity, Gamepad2, Info } from 'lucide-react';
@@ -410,6 +410,57 @@ export default function PsychometricAssessment() {
     return 'from-red-600 to-rose-700';
   };
 
+  // Map assessment result + selected test to a MoodType used by getGameRecommendations
+  const getMoodForRecommendations = (): MoodType => {
+    if (!result) return 'happy';
+    const score = result.totalScore;
+    if (selectedTest === 'gad7') {
+      if (score >= 10) return 'anxious';
+      if (score >= 5) return 'anxious';
+      return 'happy';
+    }
+    if (selectedTest === 'phq9') {
+      if (score >= 10) return 'sad';
+      if (score >= 5) return 'sad';
+      return 'happy';
+    }
+    // PANAS: higher means more positive
+    if (selectedTest === 'panas') {
+      if (score >= 60) return 'happy';
+      if (score >= 50) return 'bored';
+      return 'stressed';
+    }
+    return 'happy';
+  };
+
+  const recommendedGames = useMemo(() => {
+    const mood = getMoodForRecommendations();
+    return getGameRecommendations(mood).slice(0, 3);
+  }, [result, selectedTest]);
+
+  type ConsultantSimple = { id: string; full_name?: string; booking_url?: string; picture_url?: string };
+  const [consultantsList, setConsultantsList] = useState<ConsultantSimple[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchConsultants = async () => {
+      try {
+        const res = await fetch('/api/consultants', { cache: 'no-store' });
+        const json = await res.json().catch(() => ({}));
+        if (!mounted) return;
+        setConsultantsList((json?.consultants as ConsultantSimple[]) || []);
+      } catch (e) {
+        console.error('Error fetching consultants for recommendations:', e);
+      }
+    };
+    fetchConsultants();
+    return () => { mounted = false; };
+  }, []);
+
+  const displayConsultants = useMemo(() => {
+    return consultantsList.filter(c => !!c.full_name && c.full_name.trim()).slice(0, 3);
+  }, [consultantsList]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#E2DAF5] via-white to-[#E2DAF5]">
       <nav className="border-b bg-white/80 backdrop-blur-sm">
@@ -697,31 +748,88 @@ export default function PsychometricAssessment() {
             </Card>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="border-2 border-[#3C1F71]/20 hover:border-[#3C1F71] transition-colors cursor-pointer group">
-                <Link href="/">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#3C1F71] to-[#5B3A8F] flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                      <Sparkles className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-[#3C1F71] mb-2">Try Wellness Games</h3>
-                    <p className="text-sm text-[#3C1F71]/60">
-                      Boost your mood with our interactive games
-                    </p>
-                  </CardContent>
-                </Link>
+              <Card className="border-2 border-[#3C1F71]/20 hover:border-[#3C1F71] transition-colors">
+                <CardContent className="p-8">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#3C1F71] to-[#5B3A8F] flex items-center justify-center mx-auto mb-3">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-[#3C1F71] mb-2 text-center">Try Wellness Games</h3>
+                  <p className="text-sm text-[#3C1F71]/60 text-center mb-4">Boost your mood with our interactive games</p>
+
+                  <ol className="space-y-4 text-left">
+                    {recommendedGames.map((g, idx) => (
+                      <li key={g.title} className="flex items-center gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <Link href={g.url} className="font-semibold text-[#3C1F71]">
+                              {idx + 1}. {g.title}
+                            </Link>
+                            <Link href={g.url}>
+                              <Button size="sm" className="px-3 py-1 bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] text-white hover:opacity-90 transition-opacity">
+                                Play
+                              </Button>
+                            </Link>
+                          </div>
+                          <p className="text-sm text-[#3C1F71]/70 mt-2">{g.description}</p>
+                          <p className="text-xs text-[#3C1F71]/50 mt-1">{g.reason}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </CardContent>
               </Card>
 
               <Card className="border-2 border-[#3C1F71]/20 hover:border-[#3C1F71] transition-colors">
-                <CardContent className="p-6 text-center">
-                  <Button
-                    onClick={resetAssessment}
-                    className="w-full sm:w-auto bg-gradient-to-r text-xs sm:text-sm md:text-base from-[#3C1F71] to-[#5B3A8F] hover:opacity-90 transition-opacity"
-                  >
-                    Take Assessment Again
-                  </Button>
-                  <p className="text-sm text-[#3C1F71]/60 mt-3">
-                    Track your mood changes over time
-                  </p>
+                <CardContent className="p-6">
+                  {/** Show recommendations here as well, excluding help/mood-check sessions */}
+                  <div className="mb-4">
+                    <h4 className="text-base font-semibold text-[#3C1F71] mb-4 text-center">Connect with Excepts</h4>
+                    <div className="space-y-3">
+                      {displayConsultants.map((c, idx) => {
+                        const url = c.booking_url && c.booking_url.trim() ? c.booking_url : `/consultants/${c.id}`;
+                        const isExternal = !!(c.booking_url && c.booking_url.trim());
+                        return (
+                          <div key={c.id} className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-4 min-w-0">
+                              {c.picture_url ? (
+                                <img src={c.picture_url} alt={c.full_name || 'Consultant'} className="w-[6.25rem] h-[6.25rem] object-cover rounded-md flex-shrink-0" />
+                              ) : (
+                                <div className="w-[6.25rem] h-[6.25rem] bg-[#E2DAF5] rounded-md flex items-center justify-center text-lg text-[#3C1F71] flex-shrink-0">
+                                  {c.full_name ? c.full_name.charAt(0).toUpperCase() : '?'}
+                                </div>
+                              )}
+                              <div className="text-base text-[#3C1F71] truncate">{isExternal ? (
+                                <a href={url} target="_blank" rel="noopener noreferrer" className="font-medium text-[#3C1F71] truncate">{c.full_name}</a>
+                              ) : (
+                                <Link href={url} className="font-medium text-[#3C1F71] truncate">{c.full_name}</Link>
+                              )}</div>
+                            </div>
+                            {isExternal ? (
+                              <a href={url} target="_blank" rel="noopener noreferrer">
+                                <Button size="sm" className="h-10 px-4 py-2 bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] text-white hover:opacity-90 transition-opacity">Consult Now</Button>
+                              </a>
+                            ) : (
+                              <Link href={url}>
+                                <Button size="sm" className="h-10 px-4 py-2 bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] text-white hover:opacity-90 transition-opacity">Consult Now</Button>
+                              </Link>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <Button
+                      onClick={resetAssessment}
+                      className="w-full sm:w-auto bg-gradient-to-r text-xs sm:text-sm md:text-base from-[#3C1F71] to-[#5B3A8F] hover:opacity-90 transition-opacity"
+                    >
+                      Take Assessment Again
+                    </Button>
+                    <p className="text-sm text-[#3C1F71]/60 mt-3">
+                      Track your mood changes over time
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
