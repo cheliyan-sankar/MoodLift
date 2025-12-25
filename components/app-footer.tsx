@@ -106,7 +106,18 @@ export function AppFooter() {
         </div>
 
         <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 MoodLift. All rights reserved. Your wellness journey matters to us.</p>
+          <p>
+            &copy; 2025 MoodLift. All rights reserved. Crafted with Care by{' '}
+            <a
+              href="https://hexpertify-blog-sigma.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors font-medium"
+            >
+              Hexpertify
+            </a>
+            .
+          </p>
         </div>
       </div>
     </footer>
