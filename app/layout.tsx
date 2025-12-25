@@ -72,6 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     const ogImages = seo.og_image ? [{ url: seo.og_image, alt: seo.title }] : defaultMetadata.openGraph?.images;
 
+    // Return metadata merged with defaults, including robots settings
     return {
       title: seo.title || defaultMetadata.title,
       description: seo.description || defaultMetadata.description,
@@ -91,6 +92,7 @@ export async function generateMetadata(): Promise<Metadata> {
         description: seo.description || defaultMetadata.twitter?.description,
         images: seo.og_image ? [seo.og_image] : defaultMetadata.twitter?.images,
       },
+      robots: defaultMetadata.robots,
     } as Metadata;
   } catch (err) {
     console.error('Error generating metadata:', err);
