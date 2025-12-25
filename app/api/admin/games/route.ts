@@ -254,12 +254,14 @@ export async function PUT(request: NextRequest) {
       };
 
       // Try to use game_id if column exists, otherwise use page_url
-      let upsertData = seoData;
+      let upsertData: any = seoData;
+      let onConflictKey = 'page_url';
       try {
         // Check if game_id column exists by trying to select it
         await supabase.from('seo_metadata').select('game_id').limit(1);
         // If no error, game_id column exists
         upsertData = { ...seoData, game_id: id };
+        onConflictKey = 'game_id';
       } catch (error) {
         // game_id column doesn't exist, use page_url only
         console.log('game_id column not found, using page_url only');
@@ -268,7 +270,7 @@ export async function PUT(request: NextRequest) {
       // Upsert SEO metadata
       const { error: seoError } = await supabase
         .from('seo_metadata')
-        .upsert(upsertData, { onConflict: 'page_url' });
+        .upsert(upsertData, { onConflict: onConflictKey });
 
       if (seoError) {
         console.error('Failed to save SEO metadata:', seoError);
