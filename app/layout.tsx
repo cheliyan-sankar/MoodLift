@@ -63,11 +63,9 @@ const defaultMetadata: Metadata = {
   },
 };
 
-export async function generateMetadata({ request }: { request: Request }): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   try {
-    const url = new URL(request.url);
-    const pathname = url.pathname || '/';
-    const seo = await getSeoMetadata(pathname);
+    const seo = await getSeoMetadata('/');
     if (!seo) return defaultMetadata;
 
     const ogImages = seo.og_image ? [{ url: seo.og_image, alt: seo.title }] : defaultMetadata.openGraph?.images;
@@ -81,7 +79,7 @@ export async function generateMetadata({ request }: { request: Request }): Promi
       openGraph: {
         title: seo.title || defaultMetadata.openGraph?.title,
         description: seo.description || defaultMetadata.openGraph?.description,
-        url: `${defaultMetadata.metadataBase?.toString()?.replace(/\/$/, '')}${pathname}`,
+        url: `${defaultMetadata.metadataBase?.toString()?.replace(/\/$/, '')}/`,
         siteName: defaultMetadata.openGraph?.siteName,
         images: ogImages as any,
         locale: defaultMetadata.openGraph?.locale,

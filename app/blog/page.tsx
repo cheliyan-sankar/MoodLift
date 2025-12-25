@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { getSeoMetadata } from '@/lib/seo-service';
 
 import { AppFooter } from '@/components/app-footer';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SiteHeader } from '@/components/site-header';
 import StructuredData from '@/components/structured-data';
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'MoodLift Blog - Mental Health Tips & Wellness Insights',
   description: 'Read our latest articles on mental health, emotional wellness, mindfulness practices, and AI-powered wellness techniques to improve your mood and well-being.',
   keywords: 'mental health blog, wellness tips, mindfulness, emotional wellness, mood improvement, mental health articles, wellness insights',
@@ -37,6 +38,39 @@ export const metadata: Metadata = {
     canonical: '/blog',
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seo = await getSeoMetadata('/blog');
+    if (!seo) return defaultMetadata;
+
+    const ogImages = seo.og_image ? [{ url: seo.og_image, alt: seo.title }] : defaultMetadata.openGraph?.images;
+
+    return {
+      title: seo.title || defaultMetadata.title,
+      description: seo.description || defaultMetadata.description,
+      keywords: seo.keywords || defaultMetadata.keywords,
+      metadataBase: new URL('https://moodlift.com'),
+      alternates: defaultMetadata.alternates,
+      openGraph: {
+        title: seo.title || defaultMetadata.openGraph?.title,
+        description: seo.description || defaultMetadata.openGraph?.description,
+        url: 'https://moodlift.com/blog',
+        siteName: defaultMetadata.openGraph?.siteName,
+        images: ogImages as any,
+        locale: defaultMetadata.openGraph?.locale,
+      },
+      twitter: {
+        title: seo.title || defaultMetadata.twitter?.title,
+        description: seo.description || defaultMetadata.twitter?.description,
+        images: seo.og_image ? [seo.og_image] : defaultMetadata.twitter?.images,
+      },
+    } as Metadata;
+  } catch (err) {
+    console.error('Error generating metadata:', err);
+    return defaultMetadata;
+  }
+}
 
 export default function BlogPage() {
   return (
