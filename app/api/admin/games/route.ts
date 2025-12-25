@@ -103,22 +103,21 @@ export async function POST(request: NextRequest) {
         console.log('Could not save colors directly');
       }
 
-      // Save SEO metadata if provided
-      if (seo_title || seo_description || seo_keywords || seo_og_image || seo_og_title || seo_og_description) {
-        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-        const pageUrl = `/games/${slug}`;
-        
-        const seoData = {
-          page_url: pageUrl,
-          title: seo_title || title,
-          description: seo_description || description,
-          keywords: seo_keywords || '',
-          og_image: seo_og_image || '',
-          og_title: seo_og_title || seo_title || title,
-          og_description: seo_og_description || seo_description || description,
-          twitter_card: 'summary_large_image',
-          updated_at: new Date().toISOString(),
-        };
+      // Save SEO metadata - always attempt for games to allow clearing SEO data
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const pageUrl = `/games/${slug}`;
+      
+      const seoData = {
+        page_url: pageUrl,
+        title: seo_title || title,
+        description: seo_description || description,
+        keywords: seo_keywords || '',
+        og_image: seo_og_image || '',
+        og_title: seo_og_title || seo_title || title,
+        og_description: seo_og_description || seo_description || description,
+        twitter_card: 'summary_large_image',
+        updated_at: new Date().toISOString(),
+      };
 
         // Upsert SEO metadata
         const { error: seoError } = await supabase
@@ -129,7 +128,6 @@ export async function POST(request: NextRequest) {
           console.error('Failed to save SEO metadata:', seoError);
           // Don't fail the whole request for SEO errors
         }
-      }
 
       // Re-fetch to ensure persisted fields (cover_image_url, is_popular, etc.)
       const { data: fetched, error: fetchErr } = await supabase
@@ -225,15 +223,14 @@ export async function PUT(request: NextRequest) {
       console.log('Could not save colors directly');
     }
 
-    // Save SEO metadata if provided
-    if (seo_title || seo_description || seo_keywords || seo_og_image || seo_og_title || seo_og_description) {
-      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-      const pageUrl = `/games/${slug}`;
-      
-      const seoData = {
-        page_url: pageUrl,
-        title: seo_title || title,
-        description: seo_description || description,
+    // Save SEO metadata - always attempt for games to allow clearing SEO data
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const pageUrl = `/games/${slug}`;
+    
+    const seoData = {
+      page_url: pageUrl,
+      title: seo_title || title,
+      description: seo_description || description,
         keywords: seo_keywords || '',
         og_image: seo_og_image || '',
         og_title: seo_og_title || seo_title || title,
@@ -251,7 +248,6 @@ export async function PUT(request: NextRequest) {
         console.error('Failed to save SEO metadata:', seoError);
         // Don't fail the whole request for SEO errors
       }
-    }
 
     // Re-fetch to ensure persisted fields (cover_image_url, is_popular, etc.)
     const { data: fetched, error: fetchErr } = await supabase

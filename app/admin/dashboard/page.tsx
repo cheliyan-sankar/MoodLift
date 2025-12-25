@@ -222,7 +222,7 @@ export default function AdminDashboard() {
       
       const response = await fetch(`/api/admin/seo-metadata?page_url=${encodeURIComponent(pageUrl)}`);
       const data = await parseJsonSafe(response);
-      if (response.ok && data.metadata) {
+      if (response.ok && data.metadata && data.metadata.length > 0) {
         return data.metadata[0];
       }
     } catch (err) {
