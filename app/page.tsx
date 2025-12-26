@@ -250,37 +250,6 @@ export default function Home() {
           }
         }}
       />
-      {/* FAQ structured data (sampleed from site FAQs) */}
-      <StructuredData script={{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How long does each activity take?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Most activities take 3-15 minutes. Specific durations are displayed on each game card and in the detailed view."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What's the difference between breathing exercises and grounding techniques?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Breathing exercises focus on controlling your breath to calm the nervous system. Grounding techniques use sensory awareness to bring you into the present moment and reduce anxiety."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I practice activities multiple times?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes! You can practice any activity as many times as you like. Regular practice enhances the benefits. We track your activity history in your dashboard."
-            }
-          }
-        ]
-      }} />
       <HomeNavbar onAuthSuccess={handleAuthSuccess} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
@@ -291,7 +260,7 @@ export default function Home() {
             One Game at a Time
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            AI-powered wellness games designed to boost your emotional well-being and create lasting positive habits
+            Mental wellness platform designed to help people understand, regulate, and improve their mood through simple, engaging activities.
           </p>
         </div>
 

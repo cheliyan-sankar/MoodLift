@@ -45,6 +45,7 @@ export function FAQSection({ title, items = [], page, schemaType = 'HomePage' }:
   };
 
   const displayFaqs = faqs.length > 0 ? faqs : items;
+  const shouldRenderSchema = displayFaqs.length > 0;
 
   // Generate Schema.org FAQ structured data
   const schemaData = {
@@ -63,10 +64,12 @@ export function FAQSection({ title, items = [], page, schemaType = 'HomePage' }:
   return (
     <>
       {/* Schema.org JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-      />
+      {shouldRenderSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      ) : null}
 
       <section className="py-6 sm:py-8 bg-gradient-to-br from-white via-secondary/20 to-accent/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
