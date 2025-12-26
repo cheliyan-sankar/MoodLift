@@ -17,7 +17,7 @@ function ThoughtChallengerContent() {
             <Link href="/games">
               <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Games
+                Back
               </Button>
             </Link>
           </div>

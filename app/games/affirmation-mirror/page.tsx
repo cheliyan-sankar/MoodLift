@@ -17,7 +17,7 @@ function AffirmationMirrorContent() {
             <Link href="/games">
               <Button size="sm" className="bg-gradient-to-r from-rose-400 to-pink-500 hover:opacity-90 text-white">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Games
+                Back
               </Button>
             </Link>
           </div>

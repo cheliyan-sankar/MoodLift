@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { AppFooter } from "@/components/app-footer";
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Gamepad2 } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Gamepad2 } from 'lucide-react';
 import { useBackgroundMusic } from '@/hooks/use-background-music';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
@@ -308,11 +308,20 @@ export default function WorryBox() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(135deg, #F5F0FF 0%, #E8DCF7 100%)' }}>
-      <div className="absolute top-6 left-6">
-        <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg">
-          Back
-        </Button>
-      </div>
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => router.back()}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <div />
+          </div>
+        </div>
+      </nav>
 
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
         <div className="w-full max-w-2xl">

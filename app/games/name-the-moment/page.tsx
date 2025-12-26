@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, RotateCcw, Home } from "lucide-react";
+import { ArrowLeft, RotateCcw, Gamepad2 } from "lucide-react";
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
 type Step =
@@ -132,8 +132,8 @@ export default function NameTheMoment() {
     setBreatheTimeLeft(5);
   };
 
-  const handleHome = () => {
-    router.push("/");
+  const handleReturnToGames = () => {
+    router.push("/games");
   };
 
   const getValidationMessage = (): string => {
@@ -449,12 +449,12 @@ export default function NameTheMoment() {
                       Start Another
                     </Button>
                     <Button
-                      onClick={handleHome}
+                      onClick={handleReturnToGames}
                       size="lg"
                       className="w-full md:flex-1 bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 text-white"
                     >
-                      <Home className="w-4 h-4 mr-2" />
-                      Go Home
+                      <Gamepad2 className="w-4 h-4 mr-2" />
+                      Return to Games
                     </Button>
                   </div>
                 </div>

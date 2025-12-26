@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { AppFooter } from "@/components/app-footer";
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { RotateCcw } from 'lucide-react';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { useBackgroundMusic } from '@/hooks/use-background-music';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
@@ -291,16 +291,24 @@ export default function BoxBreathing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-purple-50 flex flex-col items-center justify-center px-6 py-12 relative">
-      {/* Header */}
-      <div className="absolute top-6 left-6">
-        <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg">
-          Back
-        </Button>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-white to-purple-50 flex flex-col">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => router.back()}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <div />
+          </div>
+        </div>
+      </nav>
 
-      {/* Main Content */}
-      <div className="w-full max-w-3xl mx-auto text-center pt-14 md:pt-0">
+      <main className="flex-1 px-6 py-12 flex flex-col items-center justify-center">
+        <div className="w-full max-w-3xl mx-auto text-center">
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 w-full">Box Breathing</h1>
         <p className="text-sm text-gray-600 mb-12 w-full">A simple breathing technique supported by <span className="font-bold">Cognitive Behavioral Therapy (CBT)</span> principles to help reduce stress.</p>
@@ -451,8 +459,10 @@ export default function BoxBreathing() {
           </div>
         </div>
 
-      </div>
-    <AppFooter />
+        </div>
+      </main>
+
+      <AppFooter />
     </div>
   );
 }

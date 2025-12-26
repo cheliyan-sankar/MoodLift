@@ -112,13 +112,27 @@ export default function PhysicalGrounding() {
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-50">
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-start justify-start mb-4">
-            <Button onClick={handleBack} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={handleBack}
+              className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white shadow-lg text-xs sm:text-sm"
+            >
               Back
             </Button>
-          </div>
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-teal-600">Physical Grounding</h1>
+
+            <Button
+              onClick={() => setVoiceEnabled((prev) => !prev)}
+              variant="outline"
+              size="sm"
+              className="border-2 border-teal-300 text-teal-600 hover:bg-teal-50"
+              aria-label={voiceEnabled ? 'Mute sound' : 'Unmute sound'}
+            >
+              {voiceEnabled ? (
+                <Volume2 className="w-4 h-4" />
+              ) : (
+                <VolumeX className="w-4 h-4" />
+              )}
+            </Button>
           </div>
         </div>
       </nav>
@@ -203,18 +217,6 @@ export default function PhysicalGrounding() {
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Reset
-              </Button>
-              <Button
-                onClick={() => setVoiceEnabled(!voiceEnabled)}
-                variant={voiceEnabled ? 'default' : 'outline'}
-                size="lg"
-                className="sm:flex-none"
-              >
-                {voiceEnabled ? (
-                  <Volume2 className="w-4 h-4" />
-                ) : (
-                  <VolumeX className="w-4 h-4" />
-                )}
               </Button>
             </div>
 

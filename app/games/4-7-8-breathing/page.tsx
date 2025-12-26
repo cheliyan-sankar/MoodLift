@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { AppFooter } from "@/components/app-footer";
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 import { useBackgroundMusic } from '@/hooks/use-background-music';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
@@ -29,7 +29,7 @@ export default function Breathing478() {
   const sessionStartRef = useRef(0);
   const sessionDurationSecondsRef = useRef(0);
 
-  useBackgroundMusic(true, 0.25);
+  useBackgroundMusic(soundEnabled, 0.25);
 
   useLogGameActivity('4-7-8 Breathing', isRunning);
 
@@ -209,14 +209,36 @@ export default function Breathing478() {
   // Completion Screen
   if (showCompletion) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center justify-center px-6 py-12 relative">
-        <div className="absolute top-6 left-6">
-          <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg">
-            Back
-          </Button>
-        </div>
+      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col">
+        <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={() => router.back()}
+                className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:opacity-90 text-white text-xs sm:text-sm"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back
+              </Button>
+              <Button
+                onClick={() => setSoundEnabled((prev) => !prev)}
+                variant="outline"
+                size="sm"
+                className="border-2 border-cyan-300 text-cyan-600 hover:bg-cyan-50"
+                aria-label={soundEnabled ? 'Mute sound' : 'Unmute sound'}
+              >
+                {soundEnabled ? (
+                  <Volume2 className="w-4 h-4 md:w-5 md:h-5" />
+                ) : (
+                  <VolumeX className="w-4 h-4 md:w-5 md:h-5" />
+                )}
+              </Button>
+            </div>
+          </div>
+        </nav>
 
-        <div className="w-full max-w-3xl mx-auto pt-14 md:pt-0">
+        <main className="flex-1 px-6 py-12">
+          <div className="w-full max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <div className="text-7xl mb-6">✨</div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
@@ -295,6 +317,7 @@ export default function Breathing478() {
             </div>
           </div>
         </div>
+        </main>
 
         <AppFooter />
       </div>
@@ -303,14 +326,36 @@ export default function Breathing478() {
 
   // Main Breathing Screen
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 flex flex-col items-center justify-center px-6 py-12">
-      <div className="absolute top-6 left-6">
-        <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg">
-          Back
-        </Button>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 flex flex-col">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => router.back()}
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:opacity-90 text-white text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <Button
+              onClick={() => setSoundEnabled((prev) => !prev)}
+              variant="outline"
+              size="sm"
+              className="border-2 border-cyan-300 text-cyan-600 hover:bg-cyan-50"
+              aria-label={soundEnabled ? 'Mute sound' : 'Unmute sound'}
+            >
+              {soundEnabled ? (
+                <Volume2 className="w-4 h-4 md:w-5 md:h-5" />
+              ) : (
+                <VolumeX className="w-4 h-4 md:w-5 md:h-5" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </nav>
 
-      <div className="max-w-3xl w-full text-center pt-12 md:pt-0">
+      <main className="flex-1 px-6 py-12 flex flex-col items-center justify-center">
+      <div className="max-w-3xl w-full text-center">
         <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1">4-7-8 Breathing</h1>
         <p className="text-xs md:text-sm text-gray-600 mb-2">A soothing Pranayama-inspired <span className="font-bold">Breathwork and Somatic Regulation</span> approach that gently slows your breathing rhythm to calm your body and quiet the mind.</p>
 
@@ -451,19 +496,6 @@ export default function Breathing478() {
           >
             <RotateCcw className="w-4 h-4 md:w-5 md:h-5" />
           </Button>
-
-          <Button
-            onClick={() => setSoundEnabled(!soundEnabled)}
-            variant="outline"
-            size="sm"
-            className="border-2 border-cyan-300 text-cyan-600 hover:bg-cyan-50"
-          >
-            {soundEnabled ? (
-              <Volume2 className="w-4 h-4 md:w-5 md:h-5" />
-            ) : (
-              <VolumeX className="w-4 h-4 md:w-5 md:h-5" />
-            )}
-          </Button>
         </div>
 
         {/* Information Section */}
@@ -515,6 +547,8 @@ export default function Breathing478() {
           </div>
         </div>
       </div>
+
+      </main>
 
       <AppFooter />
 

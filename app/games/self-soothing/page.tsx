@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
-import { ArrowLeft, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, Pause, Play } from 'lucide-react';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
 type Screen = 'intro' | 'emotion' | 'touch' | 'sight' | 'sound' | 'smell' | 'taste' | 'reflection' | 'closing';
@@ -32,10 +32,8 @@ export default function SelfSoothing() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isExperiencing, setIsExperiencing] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
   const [currentExperienceIndex, setCurrentExperienceIndex] = useState(0);
   const [reflection, setReflection] = useState<ReflectionOption>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
   const hapticRef = useRef<boolean>(false);
 
   useLogGameActivity('Self-Soothing', screen !== 'intro');
@@ -89,12 +87,6 @@ export default function SelfSoothing() {
     setIsExperiencing(true);
   };
 
-  const triggerHaptic = () => {
-    if ('vibrate' in navigator) {
-      navigator.vibrate(50);
-    }
-  };
-
   const handleBack = useCallback(() => {
     try {
       if (typeof window !== 'undefined' && window.history.length > 1) {
@@ -112,84 +104,36 @@ export default function SelfSoothing() {
     startExperience();
   };
 
-  // Play ambient sound during sound experience
-  useEffect(() => {
-    if (screen === 'sound' && isExperiencing && soundEnabled && !isPaused) {
-      // Create a simple ambient tone using Web Audio API
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      // Soft, low frequency tone (50-60 Hz)
-      oscillator.frequency.value = 55;
-      oscillator.type = 'sine';
-      
-      // Very soft volume
-      gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.03, audioContext.currentTime + 0.5);
-      
-      oscillator.start();
-      
-      return () => {
-        oscillator.stop();
-      };
-    }
-  }, [screen, isExperiencing, soundEnabled, isPaused]);
-
-  // Play tick sound for timer
-  useEffect(() => {
-    if (!isExperiencing || timeLeft === 0 || !soundEnabled || isPaused) return;
-
-    const playTick = () => {
-      try {
-        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        // Higher frequency for tick sound (800 Hz)
-        oscillator.frequency.value = 800;
-        oscillator.type = 'sine';
-        
-        // Very short, quiet tick
-        gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-      } catch (e) {
-        // Silently fail if audio context not available
-      }
-    };
-
-    const interval = setInterval(playTick, 1000);
-    return () => clearInterval(interval);
-  }, [isExperiencing, timeLeft, soundEnabled, isPaused]);
-
   // Background color based on emotion level
   const emotionBackgroundColor = `hsl(270, 70%, ${95 - emotionLevel * 3}%)`;
 
   return (
     <div className="min-h-screen transition-colors duration-500" style={{ backgroundColor: emotionBackgroundColor }}>
-      <nav className="border-b bg-white/60 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Button onClick={handleBack} variant="ghost" className="mb-4 text-sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-purple-700 mb-1">Self-Soothing</h1>
-            <p className="text-xs sm:text-sm text-slate-600">A <strong>(Dialectical Behavior Therapy)DBT</strong> self-soothing skill that uses the senses to manage emotional distress.</p>
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={handleBack}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 text-white text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <div />
           </div>
         </div>
       </nav>
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
+        <div className="text-center space-y-2 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Self-Soothing
+          </h1>
+          <p className="text-sm md:text-base text-gray-600">
+            A <strong>(Dialectical Behavior Therapy) DBT</strong> self-soothing skill that uses the senses to manage emotional distress.
+          </p>
+        </div>
+
         {/* INTRO */}
         {screen === 'intro' && (
           <div className="space-y-4 flex flex-col items-center justify-center">
@@ -303,14 +247,6 @@ export default function SelfSoothing() {
                 {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
                 {isPaused ? 'Resume' : 'Pause'}
               </Button>
-              <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                size="sm"
-                variant="outline"
-                className="flex-1 flex items-center justify-center gap-2"
-              >
-                {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-              </Button>
             </div>
           </div>
         )}
@@ -364,14 +300,6 @@ export default function SelfSoothing() {
                 {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
                 {isPaused ? 'Resume' : 'Pause'}
               </Button>
-              <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                size="sm"
-                variant="outline"
-                className="flex-1 flex items-center justify-center gap-2"
-              >
-                {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-              </Button>
             </div>
           </div>
         )}
@@ -414,14 +342,6 @@ export default function SelfSoothing() {
               >
                 {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
                 {isPaused ? 'Resume' : 'Pause'}
-              </Button>
-              <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                size="sm"
-                variant="outline"
-                className="flex-1 flex items-center justify-center gap-2"
-              >
-                {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
               </Button>
             </div>
           </div>
@@ -467,14 +387,6 @@ export default function SelfSoothing() {
                 {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
                 {isPaused ? 'Resume' : 'Pause'}
               </Button>
-              <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                size="sm"
-                variant="outline"
-                className="flex-1 flex items-center justify-center gap-2"
-              >
-                {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-              </Button>
             </div>
           </div>
         )}
@@ -519,14 +431,6 @@ export default function SelfSoothing() {
               >
                 {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
                 {isPaused ? 'Resume' : 'Pause'}
-              </Button>
-              <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                size="sm"
-                variant="outline"
-                className="flex-1 flex items-center justify-center gap-2"
-              >
-                {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
               </Button>
             </div>
           </div>

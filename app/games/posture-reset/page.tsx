@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AppFooter } from "@/components/app-footer";
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, RotateCcw, CheckCircle2 } from 'lucide-react';
 import { useBackgroundMusic } from '@/hooks/use-background-music';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
@@ -155,14 +155,24 @@ export default function PostureReset() {
 
   if (isCompleted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center justify-center px-6 py-12">
-        <div className="absolute top-6 left-6">
-          <Button onClick={() => router.back()} className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg">
-            Back
-          </Button>
-        </div>
+      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col">
+        <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={() => router.back()}
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-xs sm:text-sm"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back
+              </Button>
+              <div />
+            </div>
+          </div>
+        </nav>
 
-        <div className="max-w-2xl text-center">
+        <main className="flex-1 px-6 py-12 flex items-center justify-center">
+          <div className="max-w-2xl text-center">
           <CheckCircle2 className="w-24 h-24 text-green-500 mx-auto mb-6" />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Perfect!</h1>
           <p className="text-lg text-gray-700 mb-4">You've completed the Posture Reset sequence.</p>
@@ -214,24 +224,36 @@ export default function PostureReset() {
               variant="outline"
               className="px-8"
             >
-              Back to Games
+              Back
             </Button>
           </div>
-        </div>
+          </div>
+        </main>
+
         <AppFooter />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center justify-center px-6 py-12 relative">
-      <div className="absolute top-6 left-6">
-        <Button onClick={() => router.back()} className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg">
-          Back
-        </Button>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => router.back()}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <div />
+          </div>
+        </div>
+      </nav>
 
-      <div className="w-full max-w-3xl mx-auto text-center pt-14 md:pt-0">
+      <main className="flex-1 px-6 py-12 flex items-center justify-center">
+      <div className="w-full max-w-3xl mx-auto text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 w-full">Posture Reset</h1>
         <p className="text-sm text-gray-600 mb-8 w-full">A <strong>Somatic Grounding Technique</strong> supported by <strong>Cognitive Behavioral Therapy (CBT)</strong> principles to help reconnect your mind and body.</p>
 
@@ -389,6 +411,9 @@ export default function PostureReset() {
           </div>
         </div>
       </div>
+
+      </main>
+
       <AppFooter />
     </div>
   );

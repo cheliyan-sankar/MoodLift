@@ -13,21 +13,21 @@ import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 export default function CognitiveGrounding() {
   const router = useRouter();
   const [isRunning, setIsRunning] = useState(false);
-  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
 
   const { speak, stop } = useVoiceGuide();
-  useBackgroundMusic(true, 0.25);
+  useBackgroundMusic(soundEnabled, 0.25);
 
   useLogGameActivity('Cognitive Grounding', isRunning);
 
-  // Stop voice when voice is disabled
+  // Stop voice when sound is disabled
   useEffect(() => {
-    if (!voiceEnabled) {
+    if (!soundEnabled) {
       stop();
     }
-  }, [voiceEnabled, stop]);
+  }, [soundEnabled, stop]);
 
   // Stop voice when game is paused
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function CognitiveGrounding() {
 
       if (timeLeft === 0) {
         setTimeLeft(step.duration);
-        if (voiceEnabled) {
+        if (soundEnabled) {
           speak((step as any).voiceOver || step.instruction);
         }
       } else {
@@ -95,7 +95,7 @@ export default function CognitiveGrounding() {
                   return prev + 1;
                 } else {
                   setIsRunning(false);
-                  if (voiceEnabled) {
+                  if (soundEnabled) {
                     speak('Cognitive grounding exercise complete. You are calm, clear, and grounded.');
                   }
                   return prev;
@@ -110,7 +110,7 @@ export default function CognitiveGrounding() {
     }
 
     return () => clearInterval(interval);
-  }, [isRunning, timeLeft, currentStep, steps, voiceEnabled, speak]);
+  }, [isRunning, timeLeft, currentStep, steps, soundEnabled, speak]);
 
 
   const handleReset = () => {
@@ -123,19 +123,31 @@ export default function CognitiveGrounding() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-start justify-start mb-4">
-            <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => router.back()}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
-          </div>
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-2">Cognitive Grounding</h1>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">A <span className="font-bold">Cognitive Behavioral Therapy–backed mental exercise approach</span> that redirects anxious thoughts through focused tasks and mindfulness, anchoring you in the present moment.</p>
+            <Button
+              onClick={() => setSoundEnabled((v) => !v)}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm"
+              title={soundEnabled ? 'Mute sound' : 'Unmute sound'}
+            >
+              {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </Button>
           </div>
         </div>
       </nav>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-2">Cognitive Grounding</h1>
+          <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">A <span className="font-bold">Cognitive Behavioral Therapy–backed mental exercise approach</span> that redirects anxious thoughts through focused tasks and mindfulness, anchoring you in the present moment.</p>
+        </div>
+
         <Card className="border-2 border-indigo-200">
           <CardContent className="p-12">
             {/* Animation */}
@@ -197,18 +209,6 @@ export default function CognitiveGrounding() {
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Reset
-              </Button>
-              <Button
-                onClick={() => setVoiceEnabled(!voiceEnabled)}
-                variant={voiceEnabled ? 'default' : 'outline'}
-                size="lg"
-                className="sm:flex-none"
-              >
-                {voiceEnabled ? (
-                  <Volume2 className="w-4 h-4" />
-                ) : (
-                  <VolumeX className="w-4 h-4" />
-                )}
               </Button>
             </div>
 

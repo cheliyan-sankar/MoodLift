@@ -253,21 +253,22 @@ export default function DiaphragmaticBreathing() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-start justify-start mb-4">
+          <div className="flex items-start justify-start">
             <Button onClick={() => router.back()} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm">
               Back
             </Button>
-          </div>
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">Diaphragmatic Breathing</h1>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">
-              A <span className="font-bold">Cognitive Behavioral Therapy (CBT)</span>–supported method to slow breathing, reduce anxiety, and restore calm.
-            </p>
           </div>
         </div>
       </nav>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-10">
+          <h1 className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">Diaphragmatic Breathing</h1>
+          <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">
+            A <span className="font-bold">Cognitive Behavioral Therapy (CBT)</span>–supported method to slow breathing, reduce anxiety, and restore calm.
+          </p>
+        </div>
+
         <Card className="border-2 border-blue-200">
           <CardContent className="p-12">
             {/* Main Breathing Circle */}
