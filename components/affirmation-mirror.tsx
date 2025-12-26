@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Heart, Sparkles, RefreshCw, Video, VideoOff } from 'lucide-react';
+import { Camera, Heart, Sparkles, RefreshCw, Video, VideoOff } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLogGameActivity } from '@/hooks/use-log-game-activity';
 
@@ -54,6 +54,7 @@ export function AffirmationMirror() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [cameraEnabled, setCameraEnabled] = useState(false);
   const [cameraError, setCameraError] = useState<string>('');
+  const [captureBusy, setCaptureBusy] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -162,6 +163,106 @@ export function AffirmationMirror() {
 
   const handleMirror = () => {
     setState({ ...state, mirrored: true });
+  };
+
+  const handleCaptureMoment = async () => {
+    if (!cameraEnabled || captureBusy) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const width = video.videoWidth || 1280;
+    const height = video.videoHeight || 720;
+
+    setCaptureBusy(true);
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Match the on-screen mirrored preview
+      ctx.save();
+      ctx.translate(width, 0);
+      ctx.scale(-1, 1);
+      ctx.drawImage(video, 0, 0, width, height);
+      ctx.restore();
+
+      // Add a subtle bottom gradient + affirmation text overlay (to match UI)
+      const gradient = ctx.createLinearGradient(0, height, 0, height * 0.55);
+      gradient.addColorStop(0, 'rgba(0,0,0,0.85)');
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      const text = `"${state.personalizedAffirmation}"`;
+      const maxTextWidth = width * 0.88;
+      const fontSize = Math.max(24, Math.round(height * 0.045));
+      const lineHeight = Math.round(fontSize * 1.25);
+
+      ctx.font = `bold ${fontSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
+      ctx.fillStyle = '#fca5c0';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.shadowColor = 'rgba(0,0,0,0.55)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 2;
+
+      const words = text.split(' ');
+      const lines: string[] = [];
+      let currentLine = '';
+      for (const word of words) {
+        const testLine = currentLine ? `${currentLine} ${word}` : word;
+        if (ctx.measureText(testLine).width <= maxTextWidth) {
+          currentLine = testLine;
+        } else {
+          if (currentLine) lines.push(currentLine);
+          currentLine = word;
+        }
+      }
+      if (currentLine) lines.push(currentLine);
+
+      const bottomPadding = Math.round(height * 0.08);
+      let y = height - bottomPadding;
+      for (let i = lines.length - 1; i >= 0; i--) {
+        ctx.fillText(lines[i], Math.round(width / 2), y);
+        y -= lineHeight;
+      }
+
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob(resolve, 'image/png')
+      );
+      if (!blob) return;
+
+      const fileName = `moodify-moment-${new Date().toISOString().slice(0, 10)}.png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      const navAny = navigator as any;
+      const canShareFiles = typeof navAny?.canShare === 'function' && navAny.canShare({ files: [file] });
+      if (typeof navAny?.share === 'function' && canShareFiles) {
+        await navAny.share({
+          files: [file],
+          title: 'Moodify Moment',
+          text: 'Captured from Moodify',
+        });
+        return;
+      }
+
+      // Fallback: download the snapshot so it can be shared manually
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    } catch (error) {
+      console.error('Failed to capture/share moment:', error);
+    } finally {
+      setCaptureBusy(false);
+    }
   };
 
   const handleReset = () => {
@@ -455,6 +556,14 @@ export function AffirmationMirror() {
           </div>
 
           {/* Reset Button */}
+          <Button
+            onClick={handleCaptureMoment}
+            disabled={!cameraEnabled || captureBusy}
+            className="w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:opacity-90"
+          >
+            <Camera className="w-4 h-4 mr-2" />
+            Capture Your Moment
+          </Button>
           <Button
             onClick={handleReset}
             className="w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:opacity-90"
