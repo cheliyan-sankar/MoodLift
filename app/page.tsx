@@ -153,12 +153,9 @@ export default function Home() {
     let mounted = true;
     const fetchPopular = async () => {
       try {
-        const { data } = await supabase
-          .from('games')
-          .select('*')
-          .eq('is_popular', true)
-          .order('created_at', { ascending: false })
-          .limit(3);
+        const res = await fetch('/api/games/popular?limit=3', { cache: 'no-store' });
+        const json = await res.json().catch(() => ({}));
+        const data = (json?.games as any[]) || [];
         if (!mounted) return;
 
         if (data && Array.isArray(data) && data.length > 0) {

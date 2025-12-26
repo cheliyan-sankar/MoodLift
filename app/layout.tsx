@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/lib/auth-context';
 import { FavoritesProvider } from '@/lib/favorites-context';
 import StructuredData from '@/components/structured-data';
+import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
@@ -105,6 +106,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headerList = headers();
+  const forwardedProto = headerList.get('x-forwarded-proto');
+  const forwardedHost = headerList.get('x-forwarded-host');
+  const host = forwardedHost || headerList.get('host');
+  const protocol = forwardedProto || (host?.includes('localhost') ? 'http' : 'https');
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    (host ? `${protocol}://${host}` : 'http://localhost:3000');
+
   return (
     <html lang="en">
       <head>
@@ -130,10 +141,10 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "MoodLift",
-              "url": "https://your-production-url.example.com",
+              "url": siteUrl,
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://your-production-url.example.com/search?q={search_term_string}",
+                "target": `${siteUrl}/search?q={search_term_string}`,
                 "query-input": "required name=search_term_string"
               }
             }}

@@ -49,7 +49,7 @@ function GamesHubContent() {
               <Gamepad2 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="section-title font-bold text-primary">All Activities & Games</h2>
+              <h1 className="section-title font-bold text-primary">All Activities & Games</h1>
               <p className="text-muted-foreground">
                 Breathing exercises and grounding techniques for your wellness
               </p>
