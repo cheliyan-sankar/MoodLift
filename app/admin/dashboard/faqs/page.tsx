@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { DEFAULT_FAQS, type DefaultFaqPage } from '@/lib/default-faqs';
 
 interface FAQ {
   id: string;
@@ -36,6 +37,7 @@ export default function FAQsManagement() {
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
+  const [seededPages, setSeededPages] = useState<Record<string, boolean>>({});
   const [formData, setFormData] = useState({
     question: '',
     answer: '',
@@ -50,8 +52,51 @@ export default function FAQsManagement() {
     setLoading(true);
     try {
       const res = await fetch(`/api/admin/faqs?page=${selectedPage}`);
-      const data = await res.json();
-      setFaqs(data.data || []);
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        const message = data?.error || 'Failed to load FAQs';
+        console.error('Error fetching FAQs:', message);
+        alert(message);
+        setFaqs([]);
+        return;
+      }
+      const nextFaqs = (data.data || []) as FAQ[];
+      setFaqs(nextFaqs);
+
+      // If DB is empty for this page, seed with the defaults used on the public site.
+      if (nextFaqs.length === 0 && !seededPages[selectedPage]) {
+        const defaults = DEFAULT_FAQS[selectedPage as DefaultFaqPage];
+        if (defaults && defaults.length > 0) {
+          setSeededPages((prev) => ({ ...prev, [selectedPage]: true }));
+          const seedRes = await fetch('/api/admin/faqs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: defaults.map((it) => ({
+                page: selectedPage,
+                question: it.question,
+                answer: it.answer,
+                sort_order: it.sort_order,
+                active: true,
+              })),
+            }),
+          });
+
+          if (!seedRes.ok) {
+            const seedData = await seedRes.json().catch(() => null);
+            const message = seedData?.error || 'Failed to seed default FAQs';
+            console.error('Error seeding FAQs:', message);
+            alert(message);
+            return;
+          }
+
+          // Re-fetch to show seeded FAQs
+          const seededRes = await fetch(`/api/admin/faqs?page=${selectedPage}`);
+          const seededData = await seededRes.json();
+          setFaqs((seededData.data || []) as FAQ[]);
+        }
+      }
     } catch (error) {
       console.error('Error fetching FAQs:', error);
     } finally {
@@ -67,6 +112,10 @@ export default function FAQsManagement() {
 
     setLoading(true);
     try {
+      const normalizedSortOrder = Number.isFinite(formData.sort_order)
+        ? formData.sort_order
+        : 0;
+
       const url = '/api/admin/faqs';
       const method = editingFaq ? 'PUT' : 'POST';
       const body = editingFaq
@@ -74,11 +123,13 @@ export default function FAQsManagement() {
             id: editingFaq.id,
             page: selectedPage,
             ...formData,
+            sort_order: normalizedSortOrder,
             active: true,
           }
         : {
             page: selectedPage,
             ...formData,
+            sort_order: normalizedSortOrder,
             active: true,
           };
 
@@ -88,14 +139,21 @@ export default function FAQsManagement() {
         body: JSON.stringify(body),
       });
 
-      if (res.ok) {
-        setFormData({ question: '', answer: '', sort_order: 0 });
-        setEditingFaq(null);
-        setIsDialogOpen(false);
-        fetchFaqs();
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        const message = data?.error || 'Failed to save FAQ';
+        console.error('Error saving FAQ:', message);
+        alert(message);
+        return;
       }
+
+      setFormData({ question: '', answer: '', sort_order: 0 });
+      setEditingFaq(null);
+      setIsDialogOpen(false);
+      fetchFaqs();
     } catch (error) {
       console.error('Error saving FAQ:', error);
+      alert('Failed to save FAQ');
     } finally {
       setLoading(false);
     }
@@ -117,11 +175,17 @@ export default function FAQsManagement() {
     setLoading(true);
     try {
       const res = await fetch(`/api/admin/faqs?id=${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchFaqs();
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        const message = data?.error || 'Failed to delete FAQ';
+        console.error('Error deleting FAQ:', message);
+        alert(message);
+        return;
       }
+      fetchFaqs();
     } catch (error) {
       console.error('Error deleting FAQ:', error);
+      alert('Failed to delete FAQ');
     } finally {
       setLoading(false);
     }
@@ -251,7 +315,13 @@ export default function FAQsManagement() {
               <input
                 type="number"
                 value={formData.sort_order}
-                onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) })}
+                onChange={(e) => {
+                  const nextValue = e.target.value;
+                  setFormData({
+                    ...formData,
+                    sort_order: nextValue === '' ? 0 : Number.parseInt(nextValue, 10),
+                  });
+                }}
                 placeholder="0"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />

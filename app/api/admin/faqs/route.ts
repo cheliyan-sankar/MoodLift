@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const supabase = createClient(
@@ -9,10 +9,33 @@ const supabase = createClient(
   supabaseServiceKey || 'placeholder-key'
 );
 
+function mapSupabaseErrorMessage(message: string) {
+  if (!message) return message;
+
+  // Supabase/PostgREST returns this when the table doesn't exist in the connected project
+  // (or its schema cache hasn't been refreshed).
+  if (
+    message.includes("Could not find the table") ||
+    message.includes('schema cache')
+  ) {
+    return (
+      message +
+      ' — The `faqs` table is missing (or the schema cache is stale). ' +
+      'Run the SQL migration at `supabase/migrations/20251127_create_faqs_table.sql` in your Supabase project, ' +
+      "then refresh the API schema cache (e.g., run `NOTIFY pgrst, 'reload schema';`)."
+    );
+  }
+
+  return message;
+}
+
 function checkCredentials() {
   if (!supabaseUrl || !supabaseServiceKey) {
+    const missing: string[] = [];
+    if (!supabaseUrl) missing.push('SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL)');
+    if (!supabaseServiceKey) missing.push('SUPABASE_SERVICE_ROLE_KEY');
     return NextResponse.json(
-      { error: 'Missing Supabase credentials' },
+      { error: `Missing Supabase credentials: ${missing.join(', ')}` },
       { status: 500 }
     );
   }
@@ -40,7 +63,10 @@ export async function GET(request: NextRequest) {
       .order('sort_order', { ascending: true });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: mapSupabaseErrorMessage(error.message) },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ data });
@@ -56,7 +82,45 @@ export async function POST(request: NextRequest) {
   
   try {
     const body = await request.json();
-    const { page, question, answer, sort_order } = body;
+    const { items, page, question, answer, sort_order } = body;
+
+    if (Array.isArray(items)) {
+      const normalized = items
+        .filter((it: any) => it && typeof it === 'object')
+        .map((it: any) => ({
+          page: it.page,
+          question: it.question,
+          answer: it.answer,
+          sort_order: typeof it.sort_order === 'number' ? it.sort_order : 0,
+          active: typeof it.active === 'boolean' ? it.active : true,
+        }));
+
+      if (normalized.length === 0) {
+        return NextResponse.json({ error: 'Items array is empty' }, { status: 400 });
+      }
+
+      const invalid = normalized.find((it: any) => !it.page || !it.question || !it.answer);
+      if (invalid) {
+        return NextResponse.json(
+          { error: 'Each item must include page, question, and answer' },
+          { status: 400 }
+        );
+      }
+
+      const { data, error } = await supabase
+        .from('faqs')
+        .insert(normalized)
+        .select();
+
+      if (error) {
+        return NextResponse.json(
+          { error: mapSupabaseErrorMessage(error.message) },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json({ data }, { status: 201 });
+    }
 
     if (!page || !question || !answer) {
       return NextResponse.json(
@@ -77,7 +141,10 @@ export async function POST(request: NextRequest) {
       .select();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: mapSupabaseErrorMessage(error.message) },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ data }, { status: 201 });
@@ -113,7 +180,10 @@ export async function PUT(request: NextRequest) {
       .select();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: mapSupabaseErrorMessage(error.message) },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ data });
@@ -141,7 +211,10 @@ export async function DELETE(request: NextRequest) {
       .eq('id', id);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: mapSupabaseErrorMessage(error.message) },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ message: 'FAQ deleted successfully' });

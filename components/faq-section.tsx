@@ -23,10 +23,10 @@ export function FAQSection({ title, items = [], page, schemaType = 'HomePage' }:
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (page && items.length === 0) {
-      fetchFaqs();
-    }
-  }, [page, items]);
+    if (!page) return;
+    fetchFaqs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const fetchFaqs = async () => {
     if (!page) return;
@@ -34,7 +34,8 @@ export function FAQSection({ title, items = [], page, schemaType = 'HomePage' }:
     try {
       const res = await fetch(`/api/admin/faqs?page=${page}`);
       const data = await res.json();
-      setFaqs(data.data || items);
+      const nextFaqs = Array.isArray(data?.data) ? data.data : [];
+      setFaqs(nextFaqs.length > 0 ? nextFaqs : items);
     } catch (error) {
       console.error('Error fetching FAQs:', error);
       setFaqs(items);

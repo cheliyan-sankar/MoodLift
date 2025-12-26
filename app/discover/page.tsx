@@ -11,6 +11,7 @@ import { GamesSection } from '@/components/games-section';
 import { FAQSection } from '@/components/faq-section';
 import { AppFooter } from '@/components/app-footer';
 import { HomeNavbar } from '@/components/home-navbar';
+import { DEFAULT_FAQS } from '@/lib/default-faqs';
 
 function DiscoverContent() {
   return (
@@ -119,32 +120,8 @@ function DiscoverContent() {
 
         <FAQSection
           title="Discover & Resources FAQs"
-          items={[
-            {
-              question: "What's the difference between the Discover page and the Games page?",
-              answer: "The Discover page is your personalized hub with your favorites, all activities, and book recommendations. The Games page focuses specifically on wellness games and activities."
-            },
-            {
-              question: "How do I add games and books to my favorites?",
-              answer: "Click the pin icon on any game or book card. Your favorites appear in the 'Your Favorites' section for quick access. You can manage favorites from any page."
-            },
-            {
-              question: "Can I get book recommendations based on my mood?",
-              answer: "Yes! After completing a mood assessment, we recommend books tailored to your emotional state and wellness goals. You'll see personalized suggestions on the Discover page."
-            },
-            {
-              question: "How do I start using the recommended resources?",
-              answer: "Browse the Activities and Books sections, click on any item to see details, then click 'Start Playing' for games or 'Learn More' for books. Everything is accessible from the Discover page."
-            },
-            {
-              question: "Can I view my progress with different games and books?",
-              answer: "Yes! Visit your Dashboard to see your activity history, progress over time, and insights about your wellness journey."
-            },
-            {
-              question: "Are the book recommendations free?",
-              answer: "We provide detailed recommendations and summaries. Links are provided to purchase or borrow books from various platforms. Some resources may be available free online."
-            }
-          ]}
+          page="discover"
+          items={DEFAULT_FAQS.discover}
         />
       </main>
 

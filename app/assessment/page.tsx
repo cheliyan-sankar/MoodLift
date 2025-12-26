@@ -13,6 +13,7 @@ import { FAQSection } from '@/components/faq-section';
 import { useAuth } from '@/lib/auth-context';
 import { getGameRecommendations, type MoodType } from '@/lib/mood-service';
 import { HomeNavbar } from '@/components/home-navbar';
+import { DEFAULT_FAQS } from '@/lib/default-faqs';
 
 type TestType = 'panas' | 'phq9' | 'gad7' | null;
 
@@ -861,40 +862,9 @@ export default function PsychometricAssessment() {
       </main>
       <FAQSection 
         title="Assessment FAQs" 
-        page="Assessment" 
+        page="assessment" 
         schemaType="AssessmentPage"
-        items={[
-          {
-            id: '1',
-            question: 'What is the PANAS-SF assessment?',
-            answer: 'The PANAS-SF (Positive and Negative Affect Schedule - Short Form) is a 20-item self-report measure that assesses your current emotional state by measuring positive affect (PA) and negative affect (NA). It provides a quick snapshot of your mood and emotions.'
-          },
-          {
-            id: '2',
-            question: 'What is the PHQ-9 assessment?',
-            answer: 'The PHQ-9 (Patient Health Questionnaire-9) is a 9-item screening tool for depression based on DSM-IV diagnostic criteria. It measures the severity of depressive symptoms and is widely used in clinical and primary care settings.'
-          },
-          {
-            id: '3',
-            question: 'What is the GAD-7 assessment?',
-            answer: 'The GAD-7 (Generalized Anxiety Disorder-7) is a 7-item self-report measure that assesses the severity of anxiety symptoms. It helps identify and measure the severity of generalized anxiety disorder.'
-          },
-          {
-            id: '4',
-            question: 'How long do the assessments take?',
-            answer: 'Each assessment typically takes 2-3 minutes to complete. They are designed to be quick yet comprehensive, allowing you to get meaningful insights about your mental health state without taking too much of your time.'
-          },
-          {
-            id: '5',
-            question: 'Are these assessments scientifically validated?',
-            answer: 'Yes, all three assessments are scientifically validated and widely used in clinical and research settings. PANAS-SF, PHQ-9, and GAD-7 have been validated across diverse populations and are recommended by mental health organizations.'
-          },
-          {
-            id: '6',
-            question: 'Can I retake the assessments?',
-            answer: 'Absolutely! You can retake any assessment at any time. Taking assessments regularly helps you track your mood changes over time and see how your mental health is progressing.'
-          }
-        ]}
+        items={DEFAULT_FAQS.assessment}
       />
       <AppFooter />
     </div>

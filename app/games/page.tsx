@@ -9,6 +9,7 @@ import { FAQSection } from '@/components/faq-section';
 import { AppFooter } from '@/components/app-footer';
 import StructuredData from '@/components/structured-data';
 import { HomeNavbar } from '@/components/home-navbar';
+import { DEFAULT_FAQS } from '@/lib/default-faqs';
 
 function GamesHubContent() {
   return (
@@ -70,32 +71,8 @@ function GamesHubContent() {
 
         <FAQSection
           title="Games & Activities FAQs"
-          items={[
-            {
-              question: "How long does each activity take?",
-              answer: "Most activities take 3-15 minutes. Specific durations are displayed on each game card and in the detailed view."
-            },
-            {
-              question: "What's the difference between breathing exercises and grounding techniques?",
-              answer: "Breathing exercises focus on controlling your breath to calm the nervous system. Grounding techniques use sensory awareness to bring you into the present moment and reduce anxiety."
-            },
-            {
-              question: "Can I practice activities multiple times?",
-              answer: "Yes! You can practice any activity as many times as you like. Regular practice enhances the benefits. We track your activity history in your dashboard."
-            },
-            {
-              question: "Which game should I start with if I'm new?",
-              answer: "We recommend starting with Box Breathing or Describe Your Room if you're new to wellness activities. These are gentle, easy-to-follow exercises perfect for beginners."
-            },
-            {
-              question: "How do I know which game is right for my mood?",
-              answer: "Take our Mood Assessment first! Based on your results, we'll recommend specific games tailored to your emotional state and wellness goals."
-            },
-            {
-              question: "Are games available offline?",
-              answer: "Games work best online for the full experience, but you can access descriptions and benefits offline. The activities themselves are web-based."
-            }
-          ]}
+          page="games"
+          items={DEFAULT_FAQS.games}
         />
       </main>
 

@@ -17,6 +17,7 @@ import { supabase } from '@/lib/supabase';
 import { saveDailyMood, getGameRecommendations, getTodaysMood, type MoodType } from '@/lib/mood-service';
 import { AppFooter } from '@/components/app-footer';
 import StructuredData from '@/components/structured-data';
+import { DEFAULT_FAQS } from '@/lib/default-faqs';
 
 type Game = {
   id: string;
@@ -524,32 +525,8 @@ export default function Home() {
         <div className="mb-16">
           <FAQSection
             title="Frequently Asked Questions"
-            items={[
-              {
-                question: "What is MoodLift?",
-                answer: "MoodLift is an AI-powered emotional wellness platform that combines psychometric assessments, therapeutic games, breathing exercises, and personalized recommendations to support your mental health journey."
-              },
-              {
-                question: "How accurate are the mood assessments?",
-                answer: "Our assessments use validated psychometric scales (PHQ-9, GAD-7, PANAS-SF) developed by leading mental health researchers. These are the same tools used in clinical settings worldwide."
-              },
-              {
-                question: "Are the games scientifically backed?",
-                answer: "Yes! All our games and activities are based on evidence-based therapeutic techniques like CBT, MBSR, DBT, and somatic practices. Each game comes with detailed information about its mood benefits."
-              },
-              {
-                question: "Is my data secure and private?",
-                answer: "Absolutely. We use enterprise-grade encryption, secure servers, and comply with GDPR and data protection regulations. Your personal data is never shared with third parties."
-              },
-              {
-                question: "Can I use MoodLift as a replacement for therapy?",
-                answer: "MoodLift is designed to complement, not replace, professional mental health treatment. If you're experiencing a mental health crisis, please reach out to a healthcare professional or crisis helpline immediately."
-              },
-              {
-                question: "How do I pin my favorite games?",
-                answer: "Simply click the pin icon on any game card to save it to your favorites. Your pinned games appear in the 'Your Favorites' section for quick access."
-              }
-            ]}
+            page="home"
+            items={DEFAULT_FAQS.home}
           />
         </div>
       </main>
