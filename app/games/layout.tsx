@@ -75,20 +75,6 @@ export default function GamesLayout({
 }) {
   return (
     <>
-      <StructuredData
-        script={{
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          "name": "Games & Activities - MoodLift",
-          "description": "Interactive emotional wellness games and activities for mental health and well-being.",
-          "url": "/games",
-          "publisher": {
-            "@type": "Organization",
-            "name": "MoodLift",
-            "url": "https://moodlift.com"
-          }
-        }}
-      />
       {children}
     </>
   );
