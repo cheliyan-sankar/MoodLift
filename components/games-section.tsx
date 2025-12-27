@@ -15,6 +15,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import Link from 'next/link';
+import StructuredData from '@/components/structured-data';
 
 type Game = {
   id: string;
@@ -247,6 +248,60 @@ export function GamesSection() {
 
   return (
     <>
+      {games.length > 0 && (
+        <StructuredData
+          script={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "CollectionPage",
+                "@id": "https://moodlift.hexpertify.com/games#collectionpage",
+                "url": "https://moodlift.hexpertify.com/games",
+                "name": "All Activities & Games – MoodLift",
+                "description":
+                  "A collection of interactive mental wellness games and grounding activities designed to support emotional regulation, relaxation, and self-care.",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://moodlift.hexpertify.com/#website"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "@id": "https://hexpertify.com/#organization"
+                }
+              },
+              {
+                "@type": "ItemList",
+                "@id": "https://moodlift.hexpertify.com/games#itemlist",
+                "name": "MoodLift Wellness Activities",
+                "description":
+                  "A structured list of guided wellness activities based on breathing techniques, grounding practices, and cognitive behavioral approaches.",
+                "itemListOrder": "https://schema.org/ItemListOrderAscending",
+                "numberOfItems": games.length,
+                "itemListElement": games.map((game, index) => {
+                  const details = getGameDetails(game.title);
+                  const gamePath = details.gameUrl || `/games/${game.title.toLowerCase().replace(/\s+/g, '-')}`;
+                  const url = `https://moodlift.hexpertify.com${gamePath}`;
+
+                  return {
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "CreativeWork",
+                      "@id": `${url}#activity`,
+                      "name": game.title,
+                      "description": game.description,
+                      "url": url,
+                      "genre": game.category,
+                      "about": game.category,
+                      "isAccessibleForFree": true
+                    }
+                  };
+                })
+              }
+            ]
+          }}
+        />
+      )}
       {/* Filters */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <button
