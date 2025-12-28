@@ -36,7 +36,7 @@ export function SiteHeader() {
         <div className="flex justify-between items-center h-16 flex-wrap">
           <Link href="/" className="flex items-center gap-2" title="Go to MoodLift home page">
             <img
-              src="/images/HexpertifyBlog Logo - MoodLiftLogo - Edited.png"
+              src="/images/HexpertifyBlog Logo - MoodLiftLogo - Edited (2).png"
               alt="MoodLift logo"
               className="h-12 w-auto object-contain"
             />
