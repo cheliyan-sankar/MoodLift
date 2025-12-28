@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Sparkles, ClipboardList, LogOut, Menu, X, Flame } from 'lucide-react';
+import { ClipboardList, LogOut, Menu, X, Flame } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { AuthModal } from '@/components/auth-modal';
@@ -54,13 +54,12 @@ export function HomeNavbar({ onAuthSuccess }: HomeNavbarProps) {
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 flex-wrap">
-            <Link href="/" className="flex items-center gap-2" title="Go to MoodLift home page">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl sm:text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                MoodLift
-              </span>
+            <Link href="/" className="flex items-center gap-2 ml-2" title="Go to MoodLift home page">
+              <img
+                src="/images/MoodLift_Logo (1).jpg"
+                alt="MoodLift logo"
+                className="h-12 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}

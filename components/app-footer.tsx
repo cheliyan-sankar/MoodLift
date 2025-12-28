@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
 
 export function AppFooter() {
   return (
@@ -8,12 +7,11 @@ export function AppFooter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                MoodLift
-              </span>
+              <img
+                src="/images/MoodLift_Logo (1).jpg"
+                alt="MoodLift logo"
+                className="h-12 w-auto object-contain ml-2"
+              />
             </div>
             <div className="text-xs text-muted-foreground space-y-2">
               <p className="leading-snug">
