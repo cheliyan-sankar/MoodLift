@@ -133,7 +133,7 @@ export default function NameTheMoment() {
   };
 
   const handleReturnToGames = () => {
-    router.push("/games");
+    router.push("/games&activities");
   };
 
   const getValidationMessage = (): string => {

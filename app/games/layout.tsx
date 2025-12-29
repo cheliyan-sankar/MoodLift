@@ -4,6 +4,8 @@ import StructuredData from '@/components/structured-data';
 
 export const dynamic = 'force-dynamic';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://moodlift.hexpertify.com';
+
 const defaultMetadata: Metadata = {
   title: 'Games & Activities - Interactive Emotional Wellness Tools | MoodLift',
   description: 'Play interactive emotional wellness games and activities including breathing exercises, CBT challenges, grounding techniques, and mindfulness activities.',
@@ -11,11 +13,11 @@ const defaultMetadata: Metadata = {
   openGraph: {
     title: 'Games & Activities - Interactive Emotional Wellness Tools | MoodLift',
     description: 'Play interactive emotional wellness games and activities including breathing exercises, CBT challenges, grounding techniques, and mindfulness activities.',
-    url: 'https://moodlift.com/games',
+    url: `${SITE_URL.replace(/\/$/, '')}/games&activities`,
     siteName: 'MoodLift',
     images: [
       {
-        url: 'https://moodlift.com/images/og-games.jpg',
+        url: `${SITE_URL.replace(/\/$/, '')}/images/og-games.jpg`,
         width: 1200,
         height: 630,
         alt: 'Interactive Emotional Wellness Games - MoodLift',
@@ -28,10 +30,10 @@ const defaultMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Games & Activities - Interactive Emotional Wellness Tools | MoodLift',
     description: 'Play interactive emotional wellness games and activities including breathing exercises, CBT challenges, grounding techniques, and mindfulness activities.',
-    images: ['https://moodlift.com/images/og-games.jpg'],
+    images: [`${SITE_URL.replace(/\/$/, '')}/images/og-games.jpg`],
   },
   alternates: {
-    canonical: '/games',
+    canonical: '/games&activities',
   },
 };
 
@@ -46,12 +48,12 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.title || defaultMetadata.title,
       description: seo.description || defaultMetadata.description,
       keywords: seo.keywords || defaultMetadata.keywords,
-      metadataBase: new URL('https://moodlift.com'),
+      metadataBase: new URL(SITE_URL),
       alternates: defaultMetadata.alternates,
       openGraph: {
         title: seo.title || defaultMetadata.openGraph?.title,
         description: seo.description || defaultMetadata.openGraph?.description,
-        url: 'https://moodlift.com/games',
+        url: `${SITE_URL.replace(/\/$/, '')}/games&activities`,
         siteName: defaultMetadata.openGraph?.siteName,
         images: ogImages as any,
         locale: defaultMetadata.openGraph?.locale,
