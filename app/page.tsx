@@ -265,8 +265,8 @@ export default function Home() {
               >
                 <svg className="w-24 h-24 mx-auto" viewBox="0 0 53 53" aria-hidden="true">
                   <use
-                    xlinkHref={`/track-your-mood.svg#${mood.symbol}`}
-                    href={`/track-your-mood.svg#${mood.symbol}`}
+                    xlinkHref={`#${mood.symbol}`}
+                    href={`#${mood.symbol}`}
                     width="53"
                     height="53"
                   />
