@@ -15,6 +15,7 @@ export interface SeoMetadata {
   og_title?: string;
   og_description?: string;
   twitter_card: string;
+  canonical_url?: string;
 }
 
 export async function getSeoMetadata(pageUrl: string): Promise<SeoMetadata | null> {
