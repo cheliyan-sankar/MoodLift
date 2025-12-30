@@ -107,10 +107,14 @@ export default function BlogPage() {
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <Card className="border-2 border-accent/30 bg-white/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-primary">Updates & articles</CardTitle>
+            <CardTitle className="text-primary">Blog - Coming Soon</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-sm text-muted-foreground">
-            <p>Blog content will appear here soon.</p>
+            <p>
+              Our blog page is currently under construction.
+              <br />
+              <span className="font-medium text-primary">Coming Soon...</span>
+            </p>
             <div>
               <Link href="/discover" className="inline-block" title="Discover personalized wellness recommendations">
                 <Button variant="outline">Go to Discover</Button>

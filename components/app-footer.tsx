@@ -87,15 +87,13 @@ export function AppFooter() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://hexpertify-blog-sigma.vercel.app/"
+                <Link
+                  href="/blog"
                   className="hover:text-primary transition-colors"
-                  title="Visit our blog for more wellness insights"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  title="Visit our blog for wellness updates (Coming Soon)"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className="hover:text-primary transition-colors" title="Read our privacy policy and data protection practices">
