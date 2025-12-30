@@ -110,7 +110,7 @@ export function TestimonialCarousel() {
                   <div className="mb-6 flex-1 flex flex-col gap-2">
                     <p
                       className={`text-gray-700 leading-relaxed ${
-                        expandedIds.has(testimonial.id) ? '' : 'line-clamp-3'
+                        expandedIds.has(testimonial.id) ? '' : 'line-clamp-4'
                       }`}
                     >
                       &ldquo;{testimonial.feedback}&rdquo;
@@ -119,7 +119,7 @@ export function TestimonialCarousel() {
                       <button
                         type="button"
                         onClick={() => toggleExpanded(testimonial.id)}
-                        className="self-start text-sm font-medium text-primary hover:underline"
+                        className="self-end text-sm font-medium text-primary hover:underline"
                       >
                         {expandedIds.has(testimonial.id) ? 'See less' : 'See more'}
                       </button>
