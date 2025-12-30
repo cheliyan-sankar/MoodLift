@@ -20,6 +20,7 @@ type Testimonial = {
 export function TestimonialCarousel() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -53,6 +54,15 @@ export function TestimonialCarousel() {
 
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
+
+  const toggleExpanded = (id: string) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   if (loading) {
     return (
@@ -97,9 +107,24 @@ export function TestimonialCarousel() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-6 flex flex-col h-full">
-                  <p className="text-gray-700 mb-6 leading-relaxed line-clamp-3 flex-1">
-                    &ldquo;{testimonial.feedback}&rdquo;
-                  </p>
+                  <div className="mb-6 flex-1 flex flex-col gap-2">
+                    <p
+                      className={`text-gray-700 leading-relaxed ${
+                        expandedIds.has(testimonial.id) ? '' : 'line-clamp-3'
+                      }`}
+                    >
+                      &ldquo;{testimonial.feedback}&rdquo;
+                    </p>
+                    {testimonial.feedback.length > 200 && (
+                      <button
+                        type="button"
+                        onClick={() => toggleExpanded(testimonial.id)}
+                        className="self-start text-sm font-medium text-primary hover:underline"
+                      >
+                        {expandedIds.has(testimonial.id) ? 'See less' : 'See more'}
+                      </button>
+                    )}
+                  </div>
 
                   <div className="flex items-center gap-3 mt-auto">
                     <div className="relative w-12 h-12 flex-shrink-0">
