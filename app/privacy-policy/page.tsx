@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-base font-semibold text-primary mb-2">2. How We Use Your Information</h2>
               <p className="mb-2">We use your information to:</p>
               <ul className="list-disc pl-5">
-                <li>Provide and maintain the Moodify platform</li>
+                <li>Provide and maintain the MoodLift platform</li>
                 <li>Improve user experience and platform performance</li>
                 <li>Understand usage patterns and engagement</li>
                 <li>Personalize content and activities</li>
