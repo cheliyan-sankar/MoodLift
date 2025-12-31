@@ -17,6 +17,7 @@ import { supabase } from '@/lib/supabase';
 import { saveDailyMood, getGameRecommendations, getTodaysMood, type MoodType } from '@/lib/mood-service';
 import { AppFooter } from '@/components/app-footer';
 import StructuredData from '@/components/structured-data';
+import { AuthModal } from '@/components/auth-modal';
 
 type Game = {
   id: string;
@@ -52,10 +53,15 @@ export default function Home() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [recommendations, setRecommendations] = useState<Game[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const recommendationsRef = useRef<HTMLDivElement | null>(null);
 
   const handleAssessmentClick = () => {
-    router.push('/mood-assessment');
+    if (user) {
+      router.push('/mood-assessment');
+    } else {
+      setShowAuthModal(true);
+    }
   };
 
   useEffect(() => {
@@ -236,6 +242,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-secondary/20 to-accent/10">
       <StructuredData id="schema-website" script={websiteSchema} />
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={handleAuthSuccess}
+      />
       <HomeNavbar onAuthSuccess={handleAuthSuccess} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">

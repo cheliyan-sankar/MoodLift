@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gamepad2, BookOpen, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { ProtectedRoute } from '@/components/protected-route';
+import { AuthModal } from '@/components/auth-modal';
+import { useAuth } from '@/lib/auth-context';
 import { BooksSection } from '@/components/books-section';
 import { FavoritesSection } from '@/components/favorites-section';
 import { GamesSection } from '@/components/games-section';
@@ -13,9 +16,29 @@ import { AppFooter } from '@/components/app-footer';
 import { HomeNavbar } from '@/components/home-navbar';
 
 function DiscoverContent() {
+  const { user } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleAssessmentClick = () => {
+    if (user) {
+      window.location.href = '/mood-assessment';
+    } else {
+      setShowAuthModal(true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-secondary/20 to-accent/10">
       <HomeNavbar />
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={() => {
+          setShowAuthModal(false);
+          window.location.href = '/mood-assessment';
+        }}
+      />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
         <div className="flex items-center justify-start mb-4">
@@ -36,11 +59,12 @@ function DiscoverContent() {
                 </p>
 
                 <div className="w-full md:w-auto">
-                  <Link href="/mood-assessment" title="Take our AI-powered mood assessment for personalized insights">
-                    <Button className="w-full md:w-auto h-11 rounded-md px-8 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity text-xs sm:text-sm md:text-base">
-                      Start Assessment
-                    </Button>
-                  </Link>
+                  <Button
+                    className="w-full md:w-auto h-11 rounded-md px-8 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity text-xs sm:text-sm md:text-base"
+                    onClick={handleAssessmentClick}
+                  >
+                    Start Assessment
+                  </Button>
                 </div>
               </div>
 

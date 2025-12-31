@@ -15,6 +15,7 @@ import { getGameRecommendations, type MoodType } from '@/lib/mood-service';
 import { HomeNavbar } from '@/components/home-navbar';
 import ConsultantCarousel from '@/components/consultant-carousel';
 import StructuredData from '@/components/structured-data';
+import { AuthModal } from '@/components/auth-modal';
 
 type TestType = 'panas' | 'phq9' | 'gad7' | null;
 
@@ -109,7 +110,7 @@ const assessmentCollectionSchema = {
   },
 } as const;
 
-export default function PsychometricAssessment() {
+function PsychometricAssessmentPage() {
   const { user } = useAuth();
   const [selectedTest, setSelectedTest] = useState<TestType>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -117,6 +118,8 @@ export default function PsychometricAssessment() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [userSession, setUserSession] = useState('');
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [pendingTest, setPendingTest] = useState<TestType>(null);
 
   const testOptions: TestOption[] = [
     {
@@ -247,6 +250,12 @@ export default function PsychometricAssessment() {
   };
 
   const handleTestSelection = (testType: TestType) => {
+    if (!user) {
+      setPendingTest(testType);
+      setShowAuthModal(true);
+      return;
+    }
+
     setSelectedTest(testType);
     setCurrentQuestion(0);
     setResponses([]);
@@ -512,6 +521,19 @@ export default function PsychometricAssessment() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#E2DAF5] via-white to-[#E2DAF5]">
       <StructuredData id="schema-assessment-collection" script={assessmentCollectionSchema} />
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={() => {
+          setShowAuthModal(false);
+          if (pendingTest) {
+            setSelectedTest(pendingTest);
+            setCurrentQuestion(0);
+            setResponses([]);
+            setResult(null);
+          }
+        }}
+      />
       <HomeNavbar />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
@@ -902,4 +924,8 @@ export default function PsychometricAssessment() {
       <AppFooter />
     </div>
   );
+}
+
+export default function AssessmentPage() {
+  return <PsychometricAssessmentPage />;
 }
