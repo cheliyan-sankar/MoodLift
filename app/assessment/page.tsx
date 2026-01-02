@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Brain, ArrowLeft, CheckCircle2, Sparkles, TrendingUp, Loader2, Heart, Activity, Gamepad2, Info, AlertTriangle } from 'lucide-react';
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
@@ -519,7 +518,7 @@ function PsychometricAssessmentPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#E2DAF5] via-white to-[#E2DAF5]">
+    <div className="min-h-screen bg-gradient-to-br from-white via-secondary/20 to-accent/10">
       <StructuredData id="schema-assessment-collection" script={assessmentCollectionSchema} />
       <AuthModal
         isOpen={showAuthModal}
@@ -536,146 +535,103 @@ function PsychometricAssessmentPage() {
       />
       <HomeNavbar />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
-        <div className="flex items-center justify-start mb-4">
-          <Button asChild variant="outline" size="sm">
-            <Link href="/">Back to home</Link>
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+        <div className="mb-6">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="rounded-full border-2 border-[#3C1F71] text-[#3C1F71] bg-white hover:bg-[#3C1F71] hover:text-white px-6 py-2 text-sm font-semibold shadow-sm"
+          >
+            <Link href="/">Back To Home</Link>
           </Button>
         </div>
 
         {!selectedTest && (
           <>
-            <Card className="mb-8 border-2 border-[#3C1F71]/20">
-              <CardHeader className="bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] text-white">
-                <CardTitle className="text-2xl flex items-center gap-2">
-                  <Brain className="w-6 h-6" />
+            <Card className="mb-8 border-2 border-[#3C1F71]/20 bg-white shadow-md">
+              <CardContent className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 text-center">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-[#3C1F71] mb-4 tracking-wide">
                   Choose Your Assessment
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <p className="text-[#3C1F71]/80 mb-4">
-                  Select the assessment that best matches what you would like to evaluate. Each assessment is scientifically validated and provides personalized insights.
+                </h2>
+                <p className="text-sm sm:text-base text-[#3C1F71]/80 leading-relaxed max-w-2xl mx-auto">
+                  Select the assessment that best matches what you would like to evaluate. Each assessment is
+                  scientifically validated and provides personalized insights.
                 </p>
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-0">
-              <TooltipProvider>
-                {testOptions.map((test) => {
-                  const Icon = test.icon;
-                  return (
-                    <Card
-                      key={test.id}
-                      className="group relative border-2 border-[#3C1F71]/20 hover:border-[#3C1F71] hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-visible"
-                    >
-                      <div className={`h-2 bg-gradient-to-r ${test.gradient}`} />
-                      {/* Info Icon - Top Right */}
-                      <div className="absolute -top-3 -right-3 z-10">
-                        {/* Mobile: tap to open */}
-                        <div className="sm:hidden">
+            <div className="space-y-6">
+              {testOptions.map((test) => {
+                const Icon = test.icon;
+                return (
+                  <Card
+                    key={test.id}
+                    className="rounded-lg border-2 border-[#3C1F71]/20 bg-white shadow-md overflow-hidden"
+                  >
+                    <div className={`h-1 w-full bg-gradient-to-r ${test.gradient}`} />
+                    <CardContent className="px-4 sm:px-6 md:px-8 py-6 sm:py-8">
+                      <div className="flex flex-col items-center text-center">
+                        <h3 className="text-2xl font-semibold text-[#3C1F71] mb-3 tracking-wide">
+                          {test.title}
+                        </h3>
+                        <p className="text-sm sm:text-base text-[#3C1F71]/80 max-w-xl mx-auto mb-4">
+                          {test.description}
+                        </p>
+
+                        <div className="w-full max-w-xl mx-auto rounded-lg bg-[#E2DAF5] px-4 sm:px-6 py-3 sm:py-4 mb-4">
+                          <p className="text-xs font-bold tracking-[0.15em] text-[#3C1F71] uppercase mb-2">
+                            Certified by
+                          </p>
+                          <p className="text-xs sm:text-sm text-[#3C1F71]/80 leading-relaxed">
+                            {test.info.certifiedBy}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 mt-2">
                           <Popover>
                             <PopoverTrigger asChild>
-                              <button
-                                type="button"
-                                aria-label={`${test.title} info`}
-                                className="p-2 rounded-full bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] hover:shadow-lg transition-all hover:scale-110 shadow-md"
+                              <Button
+                                variant="outline"
+                                className="rounded-full border-2 border-[#3C1F71] text-[#3C1F71] bg-white hover:bg-[#3C1F71] hover:text-white px-8 py-2 text-sm font-semibold min-w-[140px]"
                               >
-                                <Info className="w-5 h-5 text-white" />
-                              </button>
+                                Know More
+                              </Button>
                             </PopoverTrigger>
-                            <PopoverContent
-                              side="bottom"
-                              sideOffset={8}
-                              className="z-[9999] w-64 bg-white border-2 border-[#3C1F71]/20 text-[#3C1F71] shadow-2xl p-2 rounded-lg"
-                            >
-                              <div className="space-y-2">
+                            <PopoverContent className="w-80 max-w-md bg-white border-2 border-[#3C1F71]/25 rounded-none shadow-xl p-4 sm:p-5 text-left text-[#3C1F71]">
+                              <div className="space-y-3 text-xs sm:text-sm">
                                 <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs">Inventor</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.inventor}</p>
+                                  <p className="font-semibold mb-1">Inventor</p>
+                                  <p className="text-[#3C1F71]/80 leading-snug">{test.info.inventor}</p>
                                 </div>
                                 <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs">Purpose</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.reason}</p>
+                                  <p className="font-semibold mb-1">Purpose</p>
+                                  <p className="text-[#3C1F71]/80 leading-snug">{test.info.reason}</p>
                                 </div>
                                 <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs">Certification</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.certifiedBy}</p>
+                                  <p className="font-semibold mb-1">Certification</p>
+                                  <p className="text-[#3C1F71]/80 leading-snug">{test.info.certifiedBy}</p>
                                 </div>
                                 <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs">Details</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.details}</p>
+                                  <p className="font-semibold mb-1">Details</p>
+                                  <p className="text-[#3C1F71]/80 leading-snug">{test.info.details}</p>
                                 </div>
                               </div>
                             </PopoverContent>
                           </Popover>
-                        </div>
 
-                        {/* Desktop/Tablet: hover tooltip */}
-                        <div className="hidden sm:block">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                type="button"
-                                aria-label={`${test.title} info`}
-                                className="p-2 rounded-full bg-gradient-to-r from-[#3C1F71] to-[#5B3A8F] hover:shadow-lg transition-all hover:scale-110 shadow-md"
-                              >
-                                <Info className="w-5 h-5 text-white" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent
-                              side="bottom"
-                              sideOffset={8}
-                              className="z-[9999] w-64 sm:w-72 md:w-80 bg-white border-2 border-[#3C1F71]/20 text-[#3C1F71] shadow-2xl p-2 sm:p-3 rounded-lg"
-                            >
-                              <div className="space-y-2">
-                                <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs sm:text-sm">Inventor</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.inventor}</p>
-                                </div>
-                                <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs sm:text-sm">Purpose</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.reason}</p>
-                                </div>
-                                <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs sm:text-sm">Certification</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.certifiedBy}</p>
-                                </div>
-                                <div>
-                                  <p className="font-semibold text-[#3C1F71] text-xs sm:text-sm">Details</p>
-                                  <p className="text-[#3C1F71]/80 text-xs leading-tight">{test.info.details}</p>
-                                </div>
-                              </div>
-                            </TooltipContent>
-                          </Tooltip>
-                        </div>
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex flex-col items-center text-center">
-                          <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${test.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                            <Icon className="w-8 h-8 text-white" />
-                          </div>
-                          <h3 className="text-xl font-bold text-[#3C1F71] mb-2">{test.title}</h3>
-                          <p className="text-[#3C1F71]/70 mb-3">{test.description}</p>
-                          <div className="bg-[#E2DAF5]/50 rounded-lg p-2 mb-4 w-full">
-                            <p className="text-xs font-semibold text-[#3C1F71] mb-1">Certified by</p>
-                            <p className="text-xs text-[#3C1F71]/80">{test.info.certifiedBy}</p>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-[#3C1F71]/60">
-                            <Sparkles className="w-4 h-4" />
-                            <span>{test.duration}</span>
-                          </div>
                           <Button
-                            className={`w-full mt-4 bg-gradient-to-r ${test.gradient} hover:opacity-90 transition-opacity cursor-pointer`}
+                            className={`rounded-full bg-gradient-to-r ${test.gradient} hover:opacity-90 text-white px-10 py-2 text-sm font-semibold min-w-[140px]`}
                             onClick={() => handleTestSelection(test.id)}
                           >
-                            Start {test.title}
+                            Start
                           </Button>
                         </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </TooltipProvider>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </>
         )}
