@@ -273,7 +273,7 @@ export default function Breathing478() {
             <div className="space-y-8">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">What is 4-7-8 Breathing?</h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-justify">
                   4-7-8 breathing is a Pranayama-based mindfulness technique backed by relaxation response science. This powerful breathing pattern follows a 4-7-8 rhythm: inhale for 4 seconds, hold for 7 seconds, and exhale for 8 seconds. The extended exhale activates your <span className="font-bold">parasympathetic nervous system</span>, shifting your body from stress mode to calm mode.
                 </p>
               </div>
@@ -281,36 +281,36 @@ export default function Breathing478() {
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
                 <div className="space-y-3 text-gray-700">
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-cyan-600">Inhale (4 seconds):</span> Breathe in slowly through your nose, filling your lungs completely with fresh oxygen.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-cyan-600">Hold (7 seconds):</span> Retain your breath gently, allowing oxygen to circulate and calm your nervous system.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-cyan-600">Exhale (8 seconds):</span> Slowly release your breath through your mouth with a sigh, letting tension flow out of your body.
                   </p>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-cyan-50 p-4 rounded-lg">
-                    <p className="font-semibold text-cyan-700 mb-2">😌 Reduces Anxiety</p>
-                    <p className="text-gray-700 text-sm">The extended exhale activates your vagus nerve, triggering immediate calming responses.</p>
+                    <p className="font-semibold text-cyan-700 mb-2">Reduces Anxiety</p>
+                    <p className="text-gray-700 text-sm text-justify">The extended exhale activates your vagus nerve, triggering immediate calming responses.</p>
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <p className="font-semibold text-blue-700 mb-2">😴 Improves Sleep</p>
-                    <p className="text-gray-700 text-sm">Regular practice helps regulate your sleep-wake cycle and promotes deeper rest.</p>
+                    <p className="font-semibold text-blue-700 mb-2">Improves Sleep</p>
+                    <p className="text-gray-700 text-sm text-justify">Regular practice helps regulate your sleep-wake cycle and promotes deeper rest.</p>
                   </div>
                   <div className="bg-cyan-50 p-4 rounded-lg">
-                    <p className="font-semibold text-cyan-700 mb-2">💭 Enhances Focus</p>
-                    <p className="text-gray-700 text-sm">Calming your nervous system increases mental clarity and concentration.</p>
+                    <p className="font-semibold text-cyan-700 mb-2">Enhances Focus</p>
+                    <p className="text-gray-700 text-sm text-justify">Calming your nervous system increases mental clarity and concentration.</p>
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <p className="font-semibold text-blue-700 mb-2">🧘 Deepens Mindfulness</p>
-                    <p className="text-gray-700 text-sm">Regular practice builds your ability to stay present and aware.</p>
+                    <p className="font-semibold text-blue-700 mb-2">Deepens Mindfulness</p>
+                    <p className="text-gray-700 text-sm text-justify">Regular practice builds your ability to stay present and aware.</p>
                   </div>
                 </div>
               </div>
@@ -503,7 +503,7 @@ export default function Breathing478() {
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">What is 4-7-8 Breathing?</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed text-justify">
                 4-7-8 breathing is a Pranayama-based mindfulness technique backed by relaxation response science. This powerful breathing pattern follows a 4-7-8 rhythm: inhale for 4 seconds, hold for 7 seconds, and exhale for 8 seconds. For best results, practice for <span className="font-bold">2 - 3 minutes</span>. The extended exhale activates your <span className="font-bold">parasympathetic nervous system</span>, shifting your body from stress mode to calm mode.
               </p>
             </div>
@@ -511,36 +511,36 @@ export default function Breathing478() {
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
               <div className="space-y-3 text-gray-700">
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-cyan-600">Inhale (4 seconds):</span> Breathe in slowly through your nose, filling your lungs completely with fresh oxygen.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-cyan-600">Hold (7 seconds):</span> Retain your breath gently, allowing oxygen to circulate and calm your nervous system.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-cyan-600">Exhale (8 seconds):</span> Slowly release your breath through your mouth with a sigh, letting tension flow out of your body.
                 </p>
               </div>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-cyan-50 p-4 rounded-lg">
-                  <p className="font-semibold text-cyan-700 mb-2">😌 Reduces Anxiety</p>
-                  <p className="text-gray-700 text-sm">The extended exhale activates your vagus nerve, triggering immediate calming responses.</p>
+                  <p className="font-semibold text-cyan-700 mb-2">Reduces Anxiety</p>
+                  <p className="text-gray-700 text-sm text-justify">The extended exhale activates your vagus nerve, triggering immediate calming responses.</p>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-700 mb-2">😴 Improves Sleep</p>
-                  <p className="text-gray-700 text-sm">Regular practice helps regulate your sleep-wake cycle and promotes deeper rest.</p>
+                  <p className="font-semibold text-blue-700 mb-2">Improves Sleep</p>
+                  <p className="text-gray-700 text-sm text-justify">Regular practice helps regulate your sleep-wake cycle and promotes deeper rest.</p>
                 </div>
                 <div className="bg-cyan-50 p-4 rounded-lg">
-                  <p className="font-semibold text-cyan-700 mb-2">💭 Enhances Focus</p>
-                  <p className="text-gray-700 text-sm">Calming your nervous system increases mental clarity and concentration.</p>
+                  <p className="font-semibold text-cyan-700 mb-2">Enhances Focus</p>
+                  <p className="text-gray-700 text-sm text-justify">Calming your nervous system increases mental clarity and concentration.</p>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-700 mb-2">🧘 Deepens Mindfulness</p>
-                  <p className="text-gray-700 text-sm">Regular practice builds your ability to stay present and aware.</p>
+                  <p className="font-semibold text-blue-700 mb-2">Deepens Mindfulness</p>
+                  <p className="text-gray-700 text-sm text-justify">Regular practice builds your ability to stay present and aware.</p>
                 </div>
               </div>
             </div>

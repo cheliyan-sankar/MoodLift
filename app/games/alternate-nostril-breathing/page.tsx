@@ -337,7 +337,7 @@ export default function AlternateNostrilBreathing() {
           {/* Description */}
           <div className="bg-white rounded-lg border-2 border-purple-200 p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">About This Practice</h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-justify">
               Alternate Nostril Breathing, also known as Nadi Shodhana, is an ancient yogic breathing technique that harmonizes the nervous system. This practice alternates breathing through the left and right nostrils to balance the two hemispheres of your brain and activate your parasympathetic nervous system, promoting deep relaxation and mental clarity.
             </p>
           </div>

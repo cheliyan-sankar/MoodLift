@@ -432,7 +432,7 @@ export default function BoxBreathing() {
             {/* What is Box Breathing */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Box Breathing?</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed text-justify">
                 Box breathing is a powerful breathing technique that follows a simple 4-4-4-4 pattern: breathe in for 4 seconds, hold for 4 seconds, breathe out for 4 seconds, and hold for 4 seconds. This rhythmic pattern helps regulate your nervous system and brings balance to your mind and body. It's commonly used by athletes, military personnel, and wellness practitioners to manage stress and improve focus.
               </p>
             </div>
@@ -441,43 +441,43 @@ export default function BoxBreathing() {
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
               <div className="space-y-3 text-gray-700">
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-purple-600">Breathe In (4 seconds):</span> Slowly inhale through your nose, expanding your diaphragm and filling your lungs with fresh oxygen.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-purple-600">Hold (4 seconds):</span> Hold your breath to allow oxygen to circulate through your body, activating the parasympathetic nervous system.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-purple-600">Breathe Out (4 seconds):</span> Gently exhale through your mouth, releasing tension and stress from your body.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-purple-600">Hold (4 seconds):</span> Hold before beginning the cycle again, allowing your body to settle into a calm state.
                 </p>
               </div>
             </div>
 
-            {/* Benefits & Mood Uplift */}
+            {/* Benefits */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <p className="font-semibold text-purple-700 mb-2">✨ Reduces Anxiety</p>
-                  <p className="text-gray-700 text-sm">Activates your vagus nerve, triggering a relaxation response and calming anxious thoughts.</p>
+                  <p className="font-semibold text-purple-700 mb-2">Reduces Anxiety</p>
+                  <p className="text-gray-700 text-sm text-justify">Activates your vagus nerve, triggering a relaxation response and calming anxious thoughts.</p>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <p className="font-semibold text-purple-700 mb-2">🧠 Enhances Focus</p>
-                  <p className="text-gray-700 text-sm">Increases oxygen flow to your brain, sharpening mental clarity and concentration.</p>
+                  <p className="font-semibold text-purple-700 mb-2">Enhances Focus</p>
+                  <p className="text-gray-700 text-sm text-justify">Increases oxygen flow to your brain, sharpening mental clarity and concentration.</p>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <p className="font-semibold text-purple-700 mb-2">💪 Lowers Stress</p>
-                  <p className="text-gray-700 text-sm">Reduces cortisol levels and promotes a sense of calm throughout your body.</p>
+                  <p className="font-semibold text-purple-700 mb-2">Lowers Stress</p>
+                  <p className="text-gray-700 text-sm text-justify">Reduces cortisol levels and promotes a sense of calm throughout your body.</p>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <p className="font-semibold text-purple-700 mb-2">😊 Uplifts Mood</p>
-                  <p className="text-gray-700 text-sm">Regular practice releases endorphins and serotonin, naturally boosting your emotional well-being.</p>
+                  <p className="font-semibold text-purple-700 mb-2">Uplifts Mood</p>
+                  <p className="text-gray-700 text-sm text-justify">Regular practice releases endorphins and serotonin, naturally boosting your emotional well-being.</p>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed mt-4">
+              <p className="text-gray-700 leading-relaxed text-justify mt-4">
                 By practicing box breathing regularly, you train your nervous system to respond calmly to stress. Just a few minutes of this exercise can shift your mood, reduce overwhelm, and help you find peace amidst life's chaos. Make it a daily habit to experience lasting improvements in your emotional resilience and overall well-being.
               </p>
             </div>

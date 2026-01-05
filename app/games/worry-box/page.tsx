@@ -362,26 +362,26 @@ export default function WorryBox() {
 
               {/* What is Worry Box */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Worry Box?</h2>
-                <p className="text-gray-700 leading-relaxed">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is Worry Box?</h2>
+                <p className="text-gray-700 leading-relaxed text-justify">
                   Worry Box is a CBT (Cognitive Behavioral Therapy) inspired tool that helps you externalize worries from your mind and into a safe space. Instead of letting thoughts loop endlessly, you acknowledge them, categorize them, and decide whether they need action or acceptance. This simple but powerful process reduces mental clutter and gives your mind relief.
                 </p>
               </div>
 
               {/* How It Works */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
                 <div className="space-y-3 text-gray-700">
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-purple-600">Step 1 — Externalize:</span> Write down the worry that's been looping in your mind without judgment.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-purple-600">Step 2 — Categorize:</span> Decide: is this something you can control and take action on, or something you need to accept?
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-purple-600">Step 3 — Process:</span> If actionable, create a simple action plan. If uncontrollable, choose an acceptance tag that resonates with you.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-purple-600">Step 4 — Store & Release:</span> Watch your worry safely stored in the box, then let it go with a closing reflection.
                   </p>
                 </div>
@@ -389,26 +389,26 @@ export default function WorryBox() {
 
               {/* Benefits */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div className="bg-purple-50 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-2">🧠 Reduces Mental Clutter</p>
-                    <p className="text-gray-700 text-sm">Externalize worries from your head to create mental space and clarity.</p>
+                    <p className="font-semibold text-purple-700 mb-2">Reduces Mental Clutter</p>
+                    <p className="text-gray-700 text-sm text-justify">Externalize worries from your head to create mental space and clarity.</p>
                   </div>
                   <div className="bg-purple-50 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-2">✨ Breaks Worry Loops</p>
-                    <p className="text-gray-700 text-sm">Stop endless rumination by acknowledging and categorizing your thoughts.</p>
+                    <p className="font-semibold text-purple-700 mb-2">Breaks Worry Loops</p>
+                    <p className="text-gray-700 text-sm text-justify">Stop endless rumination by acknowledging and categorizing your thoughts.</p>
                   </div>
                   <div className="bg-purple-50 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-2">🎯 Increases Clarity</p>
-                    <p className="text-gray-700 text-sm">Distinguish between controllable and uncontrollable worries to focus your energy wisely.</p>
+                    <p className="font-semibold text-purple-700 mb-2">Increases Clarity</p>
+                    <p className="text-gray-700 text-sm text-justify">Distinguish between controllable and uncontrollable worries to focus your energy wisely.</p>
                   </div>
                   <div className="bg-purple-50 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-2">🕊️ Promotes Acceptance</p>
-                    <p className="text-gray-700 text-sm">Learn to let go of what you can't control and find peace with uncertainty.</p>
+                    <p className="font-semibold text-purple-700 mb-2">Promotes Acceptance</p>
+                    <p className="text-gray-700 text-sm text-justify">Learn to let go of what you can't control and find peace with uncertainty.</p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-justify">
                   By practicing Worry Box, you train your mind to process overwhelm in a structured way. You give yourself permission to let go of what doesn't serve you and focus on what you can actually influence. This is a safe, judgment-free space for your worries.
                 </p>
               </div>

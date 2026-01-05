@@ -464,10 +464,10 @@ export default function DescribeRoom() {
             <div className="space-y-8">
               {/* What is Describe Your Room */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                   What is Describe Your Room?
                 </h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-justify">
                   Describe Your Room is a sensory-based grounding exercise
                   rooted in the 5-4-3-2-1 mindfulness technique. By engaging all
                   five senses and focusing on your immediate environment, you
@@ -479,11 +479,11 @@ export default function DescribeRoom() {
 
               {/* How It Works */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                   How It Works
                 </h2>
                 <div className="space-y-3 text-gray-700">
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-orange-600">
                       5 Things You Can See:
                     </span>{" "}
@@ -491,7 +491,7 @@ export default function DescribeRoom() {
                     colors, shapes, textures, or objects. Observe without
                     judgment, letting your visual awareness anchor you.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-orange-600">
                       4 Things You Can Touch:
                     </span>{" "}
@@ -499,7 +499,7 @@ export default function DescribeRoom() {
                     around you. Notice the sensation of fabric, temperature,
                     surfaces, or the air on your skin.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-orange-600">
                       3 Things You Can Hear:
                     </span>{" "}
@@ -508,7 +508,7 @@ export default function DescribeRoom() {
                     natural sounds, ambient noise, or subtle environmental
                     sounds.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-orange-600">
                       2 Things You Can Smell:
                     </span>{" "}
@@ -516,7 +516,7 @@ export default function DescribeRoom() {
                     clearly, imagine a scent you enjoy. Smell connects us
                     powerfully to the present moment.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-orange-600">
                       1 Positive Anchor:
                     </span>{" "}
@@ -527,50 +527,50 @@ export default function DescribeRoom() {
                 </div>
               </div>
 
-              {/* Benefits & Mood Uplift */}
+              {/* Benefits */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Benefits & Mood Uplift
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                  Benefits
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-orange-50 p-4 rounded-lg">
                     <p className="font-semibold text-orange-700 mb-2">
-                      ⚓ Instant Grounding
+                      Instant Grounding
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Pulls you out of anxious thoughts and into your body,
                       creating an immediate sense of safety and presence.
                     </p>
                   </div>
                   <div className="bg-orange-50 p-4 rounded-lg">
                     <p className="font-semibold text-orange-700 mb-2">
-                      👁️ Sensory Awareness
+                      Sensory Awareness
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Activates all five senses, engaging your mind fully in the
                       present and breaking anxiety loops.
                     </p>
                   </div>
                   <div className="bg-orange-50 p-4 rounded-lg">
                     <p className="font-semibold text-orange-700 mb-2">
-                      🧠 Mental Clarity
+                      Mental Clarity
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Redirects racing thoughts toward concrete observations,
                       naturally clearing mental clutter and fog.
                     </p>
                   </div>
                   <div className="bg-orange-50 p-4 rounded-lg">
                     <p className="font-semibold text-orange-700 mb-2">
-                      😊 Emotional Calm
+                      Emotional Calm
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Creates a sense of control and safety by reminding you
                       that your immediate environment is stable and secure.
                     </p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed mt-4">
+                <p className="text-gray-700 leading-relaxed mt-4 text-justify">
                   By practicing Describe Your Room regularly, you develop a
                   powerful tool for managing anxiety and panic in real-time.
                   This evidence-based grounding technique helps rewire your

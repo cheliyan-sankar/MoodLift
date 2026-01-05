@@ -218,9 +218,9 @@ export default function FourSevenEightBreathing() {
                   </div>
                 </div>
 
-                {/* Benefits & Mood Uplift */}
+                {/* Benefits */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-indigo-50 p-4 rounded-lg">
                       <p className="font-semibold text-indigo-700 mb-2">😴 Improves Sleep</p>

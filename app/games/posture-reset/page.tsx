@@ -306,7 +306,7 @@ export default function PostureReset() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">What is Posture Reset?</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed text-justify">
                 Posture Reset is a guided sequence of posture-correcting movements designed to counteract the effects of prolonged sitting and poor alignment. By focusing on each body part individually, you build awareness and establish better postural habits.
               </p>
             </div>
@@ -314,48 +314,48 @@ export default function PostureReset() {
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
               <div className="space-y-3 text-gray-700">
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-blue-600">Position (6 seconds):</span> Sit or stand tall. Imagine a string lifting the crown of your head upward.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-cyan-600">Shoulder Reset (6 seconds):</span> Roll shoulders back and relax them down away from your ears.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-teal-600">Chest Alignment (6 seconds):</span> Open your chest and broaden your shoulders, sitting tall and proud.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-green-600">Jaw Relaxation (6 seconds):</span> Unclench your jaw and let your face relax completely.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-emerald-600">Hand Release (6 seconds):</span> Unclench your hands and let your arms rest naturally at your sides.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-lime-600">Spine Alignment (6 seconds):</span> Feel your entire spine lengthening, with your head over shoulders and shoulders over hips.
                 </p>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-justify">
                   <span className="font-semibold text-sky-600">Deep Breath (6 seconds):</span> Take one slow deep breath in, hold for a moment, and slowly exhale feeling the alignment.
                 </p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Key Benefits</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Benefits</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="bg-blue-50 p-3 rounded-lg">
-                  <p className="font-semibold text-blue-700 mb-1">🧖 Release Tension</p>
-                  <p className="text-gray-700 text-sm">Melt away accumulated stress from shoulders and neck.</p>
+                  <p className="font-semibold text-blue-700 mb-1">Release Tension</p>
+                  <p className="text-gray-700 text-sm text-justify">Melt away accumulated stress from shoulders and neck.</p>
                 </div>
                 <div className="bg-cyan-50 p-3 rounded-lg">
-                  <p className="font-semibold text-cyan-700 mb-1">📍 Improve Alignment</p>
-                  <p className="text-gray-700 text-sm">Train your body for better posture throughout the day.</p>
+                  <p className="font-semibold text-cyan-700 mb-1">Improve Alignment</p>
+                  <p className="text-gray-700 text-sm text-justify">Train your body for better posture throughout the day.</p>
                 </div>
                 <div className="bg-teal-50 p-3 rounded-lg">
-                  <p className="font-semibold text-teal-700 mb-1">💆 Reduce Headaches</p>
-                  <p className="text-gray-700 text-sm">Alleviate tension headaches from poor posture.</p>
+                  <p className="font-semibold text-teal-700 mb-1">Reduce Headaches</p>
+                  <p className="text-gray-700 text-sm text-justify">Alleviate tension headaches from poor posture.</p>
                 </div>
                 <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-semibold text-green-700 mb-1">⚡ Boost Energy</p>
-                  <p className="text-gray-700 text-sm">Improve circulation and oxygen flow to your brain.</p>
+                  <p className="font-semibold text-green-700 mb-1">Boost Energy</p>
+                  <p className="text-gray-700 text-sm text-justify">Improve circulation and oxygen flow to your brain.</p>
                 </div>
               </div>
             </div>

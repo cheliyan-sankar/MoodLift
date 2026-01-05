@@ -132,7 +132,7 @@ export default function CognitiveGrounding() {
               Back
             </Button>
             <Button
-              onClick={() => setSoundEnabled((v) => !v)}
+              onClick={() => setSoundEnabled(v => !v)}
               className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm"
               title={soundEnabled ? 'Mute sound' : 'Unmute sound'}
             >
@@ -145,7 +145,9 @@ export default function CognitiveGrounding() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-2">Cognitive Grounding</h1>
-          <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">A <span className="font-bold">Cognitive Behavioral Therapy–backed mental exercise approach</span> that redirects anxious thoughts through focused tasks and mindfulness, anchoring you in the present moment.</p>
+          <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">
+            A <span className="font-bold">Cognitive Behavioral Therapy–backed mental exercise approach</span> that redirects anxious thoughts through focused tasks and mindfulness, anchoring you in the present moment.
+          </p>
         </div>
 
         <Card className="border-2 border-indigo-200">
@@ -174,13 +176,10 @@ export default function CognitiveGrounding() {
             {(isRunning || currentStep >= steps.length) && (
               <div className="mb-8 text-center">
                 <h2 className="text-2xl font-bold text-primary mb-2">
-                  {isRunning && currentStep < steps.length
-                    ? steps[currentStep].title
-                    : '✓ Complete'}
+                  {isRunning && currentStep < steps.length ? steps[currentStep].title : '✓ Complete'}
                 </h2>
               </div>
             )}
-
 
             {/* Controls */}
             <div className="flex gap-2 sm:gap-4 justify-center items-center mb-8 flex-wrap">
@@ -217,56 +216,56 @@ export default function CognitiveGrounding() {
               <div className="space-y-8">
                 {/* What is Cognitive Grounding */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Cognitive Grounding?</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is Cognitive Grounding?</h2>
+                  <p className="text-gray-700 leading-relaxed text-justify">
                     Cognitive grounding is a powerful mindfulness and cognitive behavioral therapy (CBT) technique that uses mental exercises to anchor you in the present moment. When anxiety or stress tries to pull you away, cognitive grounding redirects your focus through engaging mental challenges that activate different areas of your brain, effectively interrupting anxious thought patterns and restoring mental clarity.
                   </p>
                 </div>
 
                 {/* How It Works */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
                   <div className="space-y-3 text-gray-700">
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-indigo-600">Name 5 Places (20 seconds):</span> Think of 5 places where you feel safe or happy. This taps into your memory and creates positive mental associations.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-indigo-600">Backward Counting (20 seconds):</span> Count backward from 100 by 7s or count down from 20. This engages your logical brain and requires focus, interrupting anxious thoughts.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-indigo-600">Describe Your Surroundings (20 seconds):</span> Use the 5-4-3-2-1 technique: name 5 things you see, 4 things you can touch, 3 things you hear, 2 things you smell, 1 thing you taste. This grounds you in the present moment.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-indigo-600">Mental Alphabet Game (20 seconds):</span> Think of cities, animals, foods, or names starting with each letter of the alphabet. This keeps your mind actively engaged and away from worry.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-indigo-600">Anchor to Now (10 seconds):</span> A closing affirmation that reinforces your sense of safety and control in the present moment.
                     </p>
                   </div>
                 </div>
 
-                {/* Benefits & Mood Uplift */}
+                {/* Benefits */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <p className="font-semibold text-indigo-700 mb-2">✨ Interrupts Anxiety</p>
-                      <p className="text-gray-700 text-sm">Breaks the cycle of anxious thoughts by engaging your mind in focused tasks that redirect attention away from worry.</p>
+                      <p className="font-semibold text-indigo-700 mb-2">Interrupts Anxiety</p>
+                      <p className="text-gray-700 text-sm text-justify">Breaks the cycle of anxious thoughts by engaging your mind in focused tasks that redirect attention away from worry.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <p className="font-semibold text-indigo-700 mb-2">🧠 Sharpens Focus</p>
-                      <p className="text-gray-700 text-sm">Mental exercises strengthen concentration and cognitive function, leaving you feeling mentally clear and capable.</p>
+                      <p className="font-semibold text-indigo-700 mb-2">Sharpens Focus</p>
+                      <p className="text-gray-700 text-sm text-justify">Mental exercises strengthen concentration and cognitive function, leaving you feeling mentally clear and capable.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <p className="font-semibold text-indigo-700 mb-2">⚓ Grounds in Present</p>
-                      <p className="text-gray-700 text-sm">Anchors you firmly in the here-and-now, away from past regrets or future worries, creating a sense of safety and control.</p>
+                      <p className="font-semibold text-indigo-700 mb-2">Grounds in Present</p>
+                      <p className="text-gray-700 text-sm text-justify">Anchors you firmly in the here-and-now, away from past regrets or future worries, creating a sense of safety and control.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <p className="font-semibold text-indigo-700 mb-2">😊 Uplifts Mood</p>
-                      <p className="text-gray-700 text-sm">The combination of mental engagement and positive focus creates a mood boost and sense of accomplishment.</p>
+                      <p className="font-semibold text-indigo-700 mb-2">Uplifts Mood</p>
+                      <p className="text-gray-700 text-sm text-justify">The combination of mental engagement and positive focus creates a mood boost and sense of accomplishment.</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed mt-4">
+                  <p className="text-gray-700 leading-relaxed mt-4 text-justify">
                     By practicing cognitive grounding regularly, you build resilience against anxiety and develop the mental tools to reclaim your focus whenever stress tries to take over. Just a few minutes of this CBT-backed exercise can restore your sense of calm, clarity, and confidence in facing life's challenges.
                   </p>
                 </div>
@@ -275,7 +274,7 @@ export default function CognitiveGrounding() {
           </CardContent>
         </Card>
       </main>
-    <AppFooter />
+      <AppFooter />
     </div>
   );
 }

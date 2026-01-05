@@ -362,53 +362,53 @@ export default function DiaphragmaticBreathing() {
               <div className="space-y-8">
                 {/* What is Diaphragmatic Breathing */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Diaphragmatic Breathing?</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is Diaphragmatic Breathing?</h2>
+                  <p className="text-gray-700 leading-relaxed text-justify">
                     Diaphragmatic breathing, also known as belly breathing or deep breathing, is a foundational technique from Mindfulness-Based Stress Reduction (MBSR) that engages your diaphragm to maximize oxygen intake. Unlike shallow chest breathing, this technique encourages your belly to expand fully as you breathe in, allowing your lungs to fill with oxygen and triggering your body's natural relaxation response.
                   </p>
                 </div>
 
                 {/* How It Works */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
                   <div className="space-y-3 text-gray-700">
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-blue-600">Breathe In (4 seconds):</span> Slowly inhale through your nose, focusing on expanding your belly and diaphragm. Your chest should move minimally while your belly expands like a balloon filling with air.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-blue-600">Hold (4 seconds):</span> Gently pause your breath, allowing oxygen to be absorbed by your body and activating your parasympathetic nervous system.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-blue-600">Exhale (6 seconds):</span> Slowly release your breath through your mouth, allowing your belly to naturally deflate. The longer exhale helps calm your nervous system even more.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-blue-600">Rest (2 seconds):</span> Pause naturally before beginning the next cycle, allowing your body to settle into a peaceful state.
                     </p>
                   </div>
                 </div>
 
-                {/* Benefits & Mood Uplift */}
+                {/* Benefits */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="font-semibold text-blue-700 mb-2">✨ Instant Calm</p>
-                      <p className="text-gray-700 text-sm">Activates your parasympathetic nervous system, creating an immediate sense of relaxation and peace.</p>
+                      <p className="font-semibold text-blue-700 mb-2">Instant Calm</p>
+                      <p className="text-gray-700 text-sm text-justify">Activates your parasympathetic nervous system, creating an immediate sense of relaxation and peace.</p>
                     </div>
                     <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="font-semibold text-blue-700 mb-2">🧠 Mental Clarity</p>
-                      <p className="text-gray-700 text-sm">Increased oxygen flow to your brain enhances focus, reduces brain fog, and sharpens mental clarity.</p>
+                      <p className="font-semibold text-blue-700 mb-2">Mental Clarity</p>
+                      <p className="text-gray-700 text-sm text-justify">Increased oxygen flow to your brain enhances focus, reduces brain fog, and sharpens mental clarity.</p>
                     </div>
                     <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="font-semibold text-blue-700 mb-2">❤️ Lowers Heart Rate</p>
-                      <p className="text-gray-700 text-sm">Reduces cortisol and adrenaline levels, naturally lowering your heart rate and blood pressure.</p>
+                      <p className="font-semibold text-blue-700 mb-2">Lowers Heart Rate</p>
+                      <p className="text-gray-700 text-sm text-justify">Reduces cortisol and adrenaline levels, naturally lowering your heart rate and blood pressure.</p>
                     </div>
                     <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="font-semibold text-blue-700 mb-2">😊 Emotional Balance</p>
-                      <p className="text-gray-700 text-sm">Releases tension stored in your body and promotes emotional stability and resilience.</p>
+                      <p className="font-semibold text-blue-700 mb-2">Emotional Balance</p>
+                      <p className="text-gray-700 text-sm text-justify">Releases tension stored in your body and promotes emotional stability and resilience.</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed mt-4">
+                  <p className="text-gray-700 leading-relaxed mt-4 text-justify">
                     By practicing diaphragmatic breathing regularly, you train your nervous system to naturally default to a calm state. Just a few minutes of this MBSR-backed technique can transform your mood, reduce anxiety, and help you navigate stress with greater ease. Make it a daily practice to experience deeper relaxation and improved emotional well-being.
                   </p>
                 </div>

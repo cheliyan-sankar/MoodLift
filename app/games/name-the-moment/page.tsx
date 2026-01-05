@@ -467,10 +467,10 @@ export default function NameTheMoment() {
             <div className="space-y-8">
               {/* What is Name the Moment */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                   What is Name the Moment?
                 </h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-justify">
                   Name the Moment is a compassionate emotional check-in practice
                   that helps you recognize and label your current emotional
                   state in a gentle, mindful, and non-judgmental way. Rather
@@ -485,18 +485,18 @@ export default function NameTheMoment() {
 
               {/* How It Works */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                   How It Works
                 </h2>
                 <div className="space-y-3 text-gray-700">
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-blue-600">
                       Pause & Breathe:
                     </span>{" "}
                     Begin with a gentle 5-second breathing moment to settle your
                     nervous system and create space for self-awareness.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-blue-600">
                       Identify Your Emotion:
                     </span>{" "}
@@ -504,21 +504,21 @@ export default function NameTheMoment() {
                     your own words. There's no "right" emotion—whatever you're
                     experiencing is valid.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-blue-600">
                       Rate the Intensity:
                     </span>{" "}
                     On a scale of 1-10, reflect on how strong this feeling is.
                     This helps you understand the depth of your experience.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-blue-600">
                       Reflect (Optional):
                     </span>{" "}
                     If the feeling had a voice, what would it say? This deepens
                     your understanding and connection to your emotions.
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     <span className="font-semibold text-blue-600">
                       Receive Validation:
                     </span>{" "}
@@ -528,17 +528,17 @@ export default function NameTheMoment() {
                 </div>
               </div>
 
-              {/* Benefits & Mood Uplift */}
+              {/* Benefits */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Benefits & Mood Uplift
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                  Benefits
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p className="font-semibold text-blue-700 mb-2">
-                      💭 Increases Emotional Awareness
+                      Increases Emotional Awareness
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       By naming and acknowledging what you feel, you develop
                       deeper insight into your emotional patterns and triggers.
                       This awareness is the foundation for emotional growth and
@@ -547,9 +547,9 @@ export default function NameTheMoment() {
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p className="font-semibold text-blue-700 mb-2">
-                      ✨ Reduces Emotional Overwhelm
+                      Reduces Emotional Overwhelm
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Naming an emotion decreases its intensity. When you
                       observe and validate your feelings instead of suppressing
                       them, you process them more quickly and move through them
@@ -558,9 +558,9 @@ export default function NameTheMoment() {
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p className="font-semibold text-blue-700 mb-2">
-                      🫂 Builds Self-Compassion
+                      Builds Self-Compassion
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       This practice teaches you to meet yourself with kindness
                       rather than judgment. By validating your experience, you
                       cultivate a compassionate inner voice that supports you
@@ -569,9 +569,9 @@ export default function NameTheMoment() {
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p className="font-semibold text-blue-700 mb-2">
-                      🌱 Enhances Emotional Resilience
+                      Enhances Emotional Resilience
                     </p>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm text-justify">
                       Regular practice rewires your brain to respond to emotions
                       with curiosity rather than avoidance. Over time, you
                       develop greater emotional flexibility and resilience in
@@ -579,7 +579,7 @@ export default function NameTheMoment() {
                     </p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed mt-4">
+                <p className="text-gray-700 leading-relaxed mt-4 text-justify">
                   By practicing Name the Moment regularly, you transform your
                   relationship with emotions. Instead of being overwhelmed by
                   what you feel, you become a compassionate observer of your

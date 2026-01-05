@@ -517,43 +517,43 @@ export default function SelfSoothing() {
             <div className="space-y-6">
               {/* What is Self-Soothing */}
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3">What is Self-Soothing?</h2>
-                <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3 text-center">What is Self-Soothing?</h2>
+                <p className="text-sm md:text-base text-slate-700 leading-relaxed text-justify">
                   Self-Soothing is a Dialectical Behavior Therapy (DBT) technique that uses all five senses to create immediate calm and emotional relief. When emotions feel overwhelming, your nervous system needs comfort before understanding. By intentionally engaging touch, smell, taste, sight, and sound, you activate your body's natural relaxation response and reconnect with safety.
                 </p>
               </div>
 
               {/* How It Works */}
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3">How It Works</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3 text-center">How It Works</h2>
                 <div className="space-y-2 text-sm md:text-base text-slate-700">
-                  <p><span className="font-semibold text-purple-600">Touch:</span> Place your hand over your heart or hold something soft. Feel warmth, texture, and pressure.</p>
-                  <p><span className="font-semibold text-purple-600">Sight:</span> Watch gentle movements. Let your breath match the rhythm of what you see.</p>
-                  <p><span className="font-semibold text-purple-600">Sound:</span> Listen to soothing tones. Allow sound to move through you without analysis.</p>
-                  <p><span className="font-semibold text-purple-600">Smell:</span> Imagine a comforting scent — tea, rain, flowers, memories.</p>
-                  <p><span className="font-semibold text-purple-600">Taste:</span> Sip something warm or imagine a soothing flavor. Let it linger.</p>
+                  <p className="text-justify"><span className="font-semibold text-purple-600">Touch:</span> Place your hand over your heart or hold something soft. Feel warmth, texture, and pressure.</p>
+                  <p className="text-justify"><span className="font-semibold text-purple-600">Sight:</span> Watch gentle movements. Let your breath match the rhythm of what you see.</p>
+                  <p className="text-justify"><span className="font-semibold text-purple-600">Sound:</span> Listen to soothing tones. Allow sound to move through you without analysis.</p>
+                  <p className="text-justify"><span className="font-semibold text-purple-600">Smell:</span> Imagine a comforting scent — tea, rain, flowers, memories.</p>
+                  <p className="text-justify"><span className="font-semibold text-purple-600">Taste:</span> Sip something warm or imagine a soothing flavor. Let it linger.</p>
                 </div>
               </div>
 
-              {/* Benefits & Mood Uplift */}
+              {/* Benefits */}
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3">Benefits & Mood Uplift</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-purple-700 mb-3 text-center">Benefits</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="bg-purple-50 border border-purple-200 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-1">💝 Soothes Emotional Pain</p>
-                    <p className="text-xs md:text-sm text-slate-600">Creates a safe container for difficult emotions while promoting healing and self-acceptance.</p>
+                    <p className="font-semibold text-purple-700 mb-1">Soothes Emotional Pain</p>
+                    <p className="text-xs md:text-sm text-slate-600 text-justify">Creates a safe container for difficult emotions while promoting healing and self-acceptance.</p>
                   </div>
                   <div className="bg-purple-50 border border-purple-200 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-1">⚡ Provides Immediate Relief</p>
-                    <p className="text-xs md:text-sm text-slate-600">Multisensory engagement shifts your nervous system toward calm and interrupts distressing thought patterns.</p>
+                    <p className="font-semibold text-purple-700 mb-1">Provides Immediate Relief</p>
+                    <p className="text-xs md:text-sm text-slate-600 text-justify">Multisensory engagement shifts your nervous system toward calm and interrupts distressing thought patterns.</p>
                   </div>
                   <div className="bg-purple-50 border border-purple-200 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-1">🛡️ Builds Distress Tolerance</p>
-                    <p className="text-xs md:text-sm text-slate-600">Regular practice strengthens your capacity to sit with difficult emotions and builds long-term resilience.</p>
+                    <p className="font-semibold text-purple-700 mb-1">Builds Distress Tolerance</p>
+                    <p className="text-xs md:text-sm text-slate-600 text-justify">Regular practice strengthens your capacity to sit with difficult emotions and builds long-term resilience.</p>
                   </div>
                   <div className="bg-purple-50 border border-purple-200 p-4 rounded-lg">
-                    <p className="font-semibold text-purple-700 mb-1">🌸 Cultivates Self-Compassion</p>
-                    <p className="text-xs md:text-sm text-slate-600">Choosing to soothe yourself reinforces that you deserve kindness and care, even during difficult times.</p>
+                    <p className="font-semibold text-purple-700 mb-1">Cultivates Self-Compassion</p>
+                    <p className="text-xs md:text-sm text-slate-600 text-justify">Choosing to soothe yourself reinforces that you deserve kindness and care, even during difficult times.</p>
                   </div>
                 </div>
               </div>

@@ -614,43 +614,43 @@ export function AffirmationMirror() {
       {/* Information Section */}
       <div className="pt-12 border-t border-gray-200 space-y-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Affirmation Mirror?</h2>
-          <p className="text-gray-700 leading-relaxed">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is Affirmation Mirror?</h2>
+          <p className="text-gray-700 leading-relaxed text-justify">
             Affirmation Mirror helps you combat negative self-talk by seeing your face through a lens of self-compassion while reinforcing powerful affirmations. This evidence-based practice combines visualization with positive affirmations to rewire your brain toward self-esteem and emotional resilience.
           </p>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
           <div className="space-y-3 text-gray-700">
-            <p><span className="font-semibold text-rose-500">Step 1 - Identify:</span> Write down the negative self-talk or challenge you're experiencing.</p>
-            <p><span className="font-semibold text-rose-500">Step 2 - Choose:</span> Select from personalized affirmations that counter your specific challenge.</p>
-            <p><span className="font-semibold text-rose-500">Step 3 - Personalize:</span> Customize the affirmation to feel more authentic and meaningful to you.</p>
-            <p><span className="font-semibold text-rose-500">Step 4 - Reflect:</span> See your face in a mirror with your affirmation displayed, reinforcing self-worthiness and compassion.</p>
+            <p className="text-justify"><span className="font-semibold text-rose-500">Step 1 - Identify:</span> Write down the negative self-talk or challenge you're experiencing.</p>
+            <p className="text-justify"><span className="font-semibold text-rose-500">Step 2 - Choose:</span> Select from personalized affirmations that counter your specific challenge.</p>
+            <p className="text-justify"><span className="font-semibold text-rose-500">Step 3 - Personalize:</span> Customize the affirmation to feel more authentic and meaningful to you.</p>
+            <p className="text-justify"><span className="font-semibold text-rose-500">Step 4 - Reflect:</span> See your face in a mirror with your affirmation displayed, reinforcing self-worthiness and compassion.</p>
           </div>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-rose-50 p-4 rounded-lg border border-rose-200">
-              <p className="font-semibold text-rose-600 mb-2">💪 Rewires Negative Patterns</p>
-              <p className="text-gray-700 text-sm">Combining visualization with affirmations creates powerful neural pathways that replace self-criticism with self-compassion.</p>
+              <p className="font-semibold text-rose-600 mb-2">Rewires Negative Patterns</p>
+              <p className="text-gray-700 text-sm text-justify">Combining visualization with affirmations creates powerful neural pathways that replace self-criticism with self-compassion.</p>
             </div>
             <div className="bg-rose-50 p-4 rounded-lg border border-rose-200">
-              <p className="font-semibold text-rose-600 mb-2">🧠 Boosts Self-Esteem</p>
-              <p className="text-gray-700 text-sm">Seeing yourself while affirming your worth increases self-perception and resilience against negative thoughts.</p>
+              <p className="font-semibold text-rose-600 mb-2">Boosts Self-Esteem</p>
+              <p className="text-gray-700 text-sm text-justify">Seeing yourself while affirming your worth increases self-perception and resilience against negative thoughts.</p>
             </div>
             <div className="bg-rose-50 p-4 rounded-lg border border-rose-200">
-              <p className="font-semibold text-rose-600 mb-2">💝 Builds Self-Compassion</p>
-              <p className="text-gray-700 text-sm">The mirror effect reminds you that you deserve kindness and care—especially from yourself during difficult moments.</p>
+              <p className="font-semibold text-rose-600 mb-2">Builds Self-Compassion</p>
+              <p className="text-gray-700 text-sm text-justify">The mirror effect reminds you that you deserve kindness and care—especially from yourself during difficult moments.</p>
             </div>
             <div className="bg-rose-50 p-4 rounded-lg border border-rose-200">
-              <p className="font-semibold text-rose-600 mb-2">✨ Improves Mood & Anxiety</p>
-              <p className="text-gray-700 text-sm">Visualization combined with affirmations reduces anxiety and naturally elevates your emotional state.</p>
+              <p className="font-semibold text-rose-600 mb-2">Improves Mood & Anxiety</p>
+              <p className="text-gray-700 text-sm text-justify">Visualization combined with affirmations reduces anxiety and naturally elevates your emotional state.</p>
             </div>
           </div>
-          <p className="text-gray-700 leading-relaxed mt-4">
+          <p className="text-gray-700 leading-relaxed mt-4 text-justify">
             Make this a daily practice for maximum effectiveness. Many people experience meaningful shifts in their self-perception and confidence within 2-4 weeks of consistent practice.
           </p>
         </div>

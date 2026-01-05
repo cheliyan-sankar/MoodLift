@@ -220,42 +220,42 @@ export function CBTThoughtChallenger() {
       {/* Information Section */}
       <div className="pt-12 border-t border-gray-200 space-y-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">What is CBT Thought-Challenger?</h2>
-          <p className="text-gray-700 leading-relaxed">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is CBT Thought-Challenger?</h2>
+          <p className="text-gray-700 leading-relaxed text-justify">
             CBT Thought-Challenger helps you challenge and restructure unhelpful thinking patterns. By examining your automatic negative thoughts through a structured process, you can identify thinking distortions, gather evidence, and develop more balanced perspectives.
           </p>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
           <div className="space-y-3 text-gray-700">
-            <p><span className="font-semibold text-primary">Step 1 - Identify:</span> Write down the automatic negative thought and associated mood.</p>
-            <p><span className="font-semibold text-primary">Step 2 - Challenge:</span> Examine evidence FOR and AGAINST the thought.</p>
-            <p><span className="font-semibold text-primary">Step 3 - Reframe:</span> Develop a balanced thought that's honest and realistic.</p>
+            <p className="text-justify"><span className="font-semibold text-primary">Step 1 - Identify:</span> Write down the automatic negative thought and associated mood.</p>
+            <p className="text-justify"><span className="font-semibold text-primary">Step 2 - Challenge:</span> Examine evidence FOR and AGAINST the thought.</p>
+            <p className="text-justify"><span className="font-semibold text-primary">Step 3 - Reframe:</span> Develop a balanced thought that's honest and realistic.</p>
           </div>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-              <p className="font-semibold text-primary mb-2">🎯 Breaks Thought Spirals</p>
-              <p className="text-gray-700 text-sm">Examining evidence interrupts automatic negative thinking patterns.</p>
+              <p className="font-semibold text-primary mb-2">Breaks Thought Spirals</p>
+              <p className="text-gray-700 text-sm text-justify">Examining evidence interrupts automatic negative thinking patterns.</p>
             </div>
             <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-              <p className="font-semibold text-primary mb-2">😌 Reduces Anxiety</p>
-              <p className="text-gray-700 text-sm">Moving from absolutist thoughts to realistic ones reduces emotional intensity.</p>
+              <p className="font-semibold text-primary mb-2">Reduces Anxiety</p>
+              <p className="text-gray-700 text-sm text-justify">Moving from absolutist thoughts to realistic ones reduces emotional intensity.</p>
             </div>
             <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-              <p className="font-semibold text-primary mb-2">💝 Builds Self-Compassion</p>
-              <p className="text-gray-700 text-sm">Balanced thoughts acknowledge struggles while recognizing strengths.</p>
+              <p className="font-semibold text-primary mb-2">Builds Self-Compassion</p>
+              <p className="text-gray-700 text-sm text-justify">Balanced thoughts acknowledge struggles while recognizing strengths.</p>
             </div>
             <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-              <p className="font-semibold text-primary mb-2">✨ Enables Action</p>
-              <p className="text-gray-700 text-sm">Realistic thoughts make you more likely to take helpful steps forward.</p>
+              <p className="font-semibold text-primary mb-2">Enables Action</p>
+              <p className="text-gray-700 text-sm text-justify">Realistic thoughts make you more likely to take helpful steps forward.</p>
             </div>
           </div>
-          <p className="text-gray-700 leading-relaxed mt-4">
+          <p className="text-gray-700 leading-relaxed mt-4 text-justify">
             By practicing cognitive restructuring regularly, you train your mind to automatically question unhelpful thoughts. Make it a daily habit to experience lasting improvements in mood and emotional resilience.
           </p>
         </div>

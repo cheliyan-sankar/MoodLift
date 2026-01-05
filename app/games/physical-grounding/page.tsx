@@ -231,56 +231,56 @@ export default function PhysicalGrounding() {
               <div className="space-y-8">
                 {/* What is Physical Grounding */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">What is Physical Grounding?</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What is Physical Grounding?</h2>
+                  <p className="text-gray-700 leading-relaxed text-justify">
                     Physical Grounding is a somatic technique rooted in <strong>Somatic Experiencing</strong>, <strong>Sensorimotor Psychotherapy</strong>, and <strong>Trauma-Informed Care</strong>. By deliberately engaging your five senses through physical experiences, you signal safety to your nervous system and bring yourself fully into the present moment. This powerful practice interrupts the stress response cycle and helps you transition from fight-or-flight into a calm, grounded state. When anxiety, panic, or dissociation takes over, physical grounding reconnects you with your body as a source of strength and stability.
                   </p>
                 </div>
 
                 {/* How It Works */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">How It Works</h2>
                   <div className="space-y-3 text-gray-700">
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-teal-600">Step 1 - Splash Cold Water:</span> If available, run cold water on your wrists or splash your face. The sudden cold activates your parasympathetic nervous system and brings your awareness sharply into the present moment. This sensory jolt interrupts stress spirals.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-teal-600">Step 2 - Touch Textured Objects:</span> Hold something with a distinct texture: sandpaper, rough fabric, tree bark, ice cubes, or velvet. Feel the sensation fully as your fingers explore. Tactile engagement anchors your mind to physical sensation and away from anxious thoughts.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-teal-600">Step 3 - Apply Chest Pressure:</span> Place your hand on your chest and apply gentle pressure. Feel your heartbeat beneath your fingers. This gentle pressure activates your vagus nerve and signals safety to your body, creating a sense of calm reassurance.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-teal-600">Step 4 - Engage Your Muscles:</span> Tense and release different muscle groups: make tight fists, flex your legs, tense your shoulders. Hold the tension for a few seconds, then release. This progressive muscle relaxation helps discharge trapped stress and restores your sense of agency over your body.
                     </p>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed text-justify">
                       <span className="font-semibold text-teal-600">Step 5 - Release and Ground:</span> Complete the sequence by standing with both feet firmly planted on the ground. Feel all four corners of your feet pressing down. Take three deep breaths and notice your body's stability and strength.
                     </p>
                   </div>
                 </div>
 
-                {/* Benefits & Mood Uplift */}
+                {/* Benefits */}
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits & Mood Uplift</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Benefits</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-teal-50 p-4 rounded-lg">
-                      <p className="font-semibold text-teal-700 mb-2">🌊 Anchors You in Your Body</p>
-                      <p className="text-gray-700 text-sm">Physical grounding brings your wandering mind back into your body's present-moment reality. Instead of spinning in anxious thoughts, you feel the ground beneath your feet and the sensations in your hands—proving you are here, you are safe, you are real.</p>
+                      <p className="font-semibold text-teal-700 mb-2">Anchors You in Your Body</p>
+                      <p className="text-gray-700 text-sm text-justify">Physical grounding brings your wandering mind back into your body's present-moment reality. Instead of spinning in anxious thoughts, you feel the ground beneath your feet and the sensations in your hands—proving you are here, you are safe, you are real.</p>
                     </div>
                     <div className="bg-teal-50 p-4 rounded-lg">
-                      <p className="font-semibold text-teal-700 mb-2">🛡️ Releases Trauma Responses</p>
-                      <p className="text-gray-700 text-sm">When your nervous system is stuck in survival mode, physical engagement helps discharge stored tension and stress. Tensing and releasing muscles, cold water, and pressure all signal to your body that the threat has passed and it's safe to let go.</p>
+                      <p className="font-semibold text-teal-700 mb-2">Releases Trauma Responses</p>
+                      <p className="text-gray-700 text-sm text-justify">When your nervous system is stuck in survival mode, physical engagement helps discharge stored tension and stress. Tensing and releasing muscles, cold water, and pressure all signal to your body that the threat has passed and it's safe to let go.</p>
                     </div>
                     <div className="bg-teal-50 p-4 rounded-lg">
-                      <p className="font-semibold text-teal-700 mb-2">✨ Activates Safety Signals</p>
-                      <p className="text-gray-700 text-sm">Gentle pressure on your chest, the feeling of cold water, and steady breathing activate your vagus nerve—your body's natural calming system. These signals communicate safety to your brain, naturally reducing anxiety and panic.</p>
+                      <p className="font-semibold text-teal-700 mb-2">Activates Safety Signals</p>
+                      <p className="text-gray-700 text-sm text-justify">Gentle pressure on your chest, the feeling of cold water, and steady breathing activate your vagus nerve—your body's natural calming system. These signals communicate safety to your brain, naturally reducing anxiety and panic.</p>
                     </div>
                     <div className="bg-teal-50 p-4 rounded-lg">
-                      <p className="font-semibold text-teal-700 mb-2">💪 Restores Sense of Agency</p>
-                      <p className="text-gray-700 text-sm">Through conscious physical engagement, you reclaim your power. You are not a victim of your anxiety—you are an active participant in your healing. This shift from helplessness to agency naturally uplifts your mood and builds resilience.</p>
+                      <p className="font-semibold text-teal-700 mb-2">Restores Sense of Agency</p>
+                      <p className="text-gray-700 text-sm text-justify">Through conscious physical engagement, you reclaim your power. You are not a victim of your anxiety—you are an active participant in your healing. This shift from helplessness to agency naturally uplifts your mood and builds resilience.</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed mt-4">
+                  <p className="text-gray-700 leading-relaxed mt-4 text-justify">
                     By practicing physical grounding regularly, you train your nervous system to respond to stress by returning home to your body. In moments of overwhelming anxiety, panic, or dissociation, these simple physical techniques become your anchor. You learn that your body is not your enemy—it's your greatest ally. Through sensation, movement, and presence, you transform stress into strength and fear into freedom. Make physical grounding a daily practice to experience lasting emotional stability, resilience, and inner peace.
                   </p>
                 </div>
