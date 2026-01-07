@@ -97,7 +97,7 @@ export default function AllActivities() {
                 Back
               </Button>
             </Link>
-            <div className="text-xl font-bold text-primary">All Activities & Games</div>
+            <div className="text-xl font-bold text-primary">All Mental Wellness Activities & Games</div>
             <div className="w-20"></div>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function AllActivities() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
         <div className="mb-12">
-          <h1 className="section-title font-bold text-primary">All Activities & Games</h1>
+          <h1 className="section-title font-bold text-primary">All Mental Wellness Activities & Games</h1>
           <p className="text-gray-600">All Mental Wellness Activities & Games</p>
         </div>
 

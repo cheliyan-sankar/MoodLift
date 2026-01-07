@@ -257,7 +257,7 @@ export function GamesSection() {
                 "@type": "CollectionPage",
                 "@id": "https://moodlift.hexpertify.com/games-and-activities#collectionpage",
                 "url": "https://moodlift.hexpertify.com/games-and-activities",
-                "name": "All Activities & Games – MoodLift",
+                "name": "All Mental Wellness Activities & Games – MoodLift",
                 "description":
                   "A collection of interactive mental wellness games and grounding activities designed to support emotional regulation, relaxation, and self-care.",
                 "isPartOf": {
